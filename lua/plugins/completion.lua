@@ -29,7 +29,7 @@ return {
       local lspkind = require("lspkind")
 
       -- Load custom github handles source from ./lua/cmp/github_handles.lua
-      cmp.register_source("github_handles", require("cmp.github_handles").new())
+      cmp.register_source("github_handles", require("user.cmps.github_handles").new())
 
       -- General setup.
       cmp.setup({
@@ -38,7 +38,7 @@ return {
         -- 		vim.fn["vsnip#anonymous"](args.body)
         -- 	end,
         -- },
-        matching = { disallow_fuzzy_matching = true },
+        --matching = { disallow_fuzzy_matching = true },
         mapping = {
           ["<M-p>"] = cmp.mapping.select_prev_item(),
           ["<M-n>"] = cmp.mapping.select_next_item(),
@@ -70,22 +70,22 @@ return {
           { name = "buffer",        keyword_length = 3 },
           { name = "calc" },
           { name = "dictionary",    priority = 0.1 },
-          { name = "github_handles" }, -- from ./lua/cmp/github_handles.lua
+          { name = "github_handles" },           -- from ./lua/cmp/github_handles.lua
           { name = "luasnip",       priority = 100 },
         },
-        formatting = {
-          fields = { "abbr", "kind", "menu" },
-          format = lspkind.cmp_format({
-            mode = "symbol_text",
-            maxwidth = 80,
-            menu = {
-              buffer = "[Buffer]",
-              nvim_lsp = "[LSP]",
-              obsidian = "[Obsidian]",
-              obsidian_new = "[Obsidian]",
-            },
-          }),
-        },
+        -- formatting = {
+        --   fields = { "abbr", "kind", "menu" },
+        --   format = lspkind.cmp_format({
+        --     mode = "symbol_text",
+        --     maxwidth = 80,
+        --     menu = {
+        --       buffer = "[Buffer]",
+        --       nvim_lsp = "[LSP]",
+        --       obsidian = "[Obsidian]",
+        --       obsidian_new = "[Obsidian]",
+        --     },
+        --   }),
+        -- },
         -- python: try to keep dict also for python -> require dict sugg to be last:
         --sorting = { comparators = { compare.kind } },
         --

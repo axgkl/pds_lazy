@@ -1,16 +1,15 @@
+local d_vault = os.getenv("OBS_VAULT") or vim.fn.expand("~/notes")
+
 local options = {
-  dir = "~/notes", -- no need to call 'vim.fn.expand' here
+  dir = d_vault,
   -- Optional, if you keep notes in a specific subdirectory of your vault.
-  notes_subdir = "notes",
-  -- Optional, if you keep daily notes in a separate directory.
+  --notes_subdir = "notes",
   daily_notes = {
     folder = "notes/dailies",
   },
-  -- Optional, completion.
   completion = {
-    nvim_cmp = false, -- if using nvim-cmp, otherwise set to false
+    nvim_cmp = true,
   },
-  -- Optional, customize how names/IDs for new notes are created.
   note_id_func = function(title)
     -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
     -- In this case a note with the title 'My new note' will given an ID that looks
@@ -65,7 +64,7 @@ local options = {
 return {
   "epwalsh/obsidian.nvim",
   lazy = true,
-  event = { "BufReadPre /home/gk/notes/**.md" },
+  event = { "BufReadPre " .. d_vault .. "/**.md" },
   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand':
   -- event = { "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md" },
   dependencies = {
@@ -80,11 +79,6 @@ return {
 
     -- Optional, an alternative to telescope for search and quick-switch functionality.
     -- "ibhagwan/fzf-lua"
-
-    -- Optional, another alternative to telescope for search and quick-switch functionality.
-    -- "junegunn/fzf",
-    -- "junegunn/fzf.vim"
-
     -- Optional, alternative to nvim-treesitter for syntax highlighting.
     "godlygeek/tabular",
     "preservim/vim-markdown",
@@ -104,6 +98,7 @@ return {
       end
     end, { noremap = false, expr = true })
   end,
+
   init = function()
     local lazy_setup = function()
       -- Configure completion...
@@ -128,7 +123,7 @@ return {
     -- Complete lazy setup on BufEnter
     vim.api.nvim_create_autocmd({ "BufEnter" }, {
       group = group,
-      pattern = tostring("/home/gk/notes/**.md"),
+      pattern = d_vault .. "/**.md",
       callback = lazy_setup,
     })
   end,
