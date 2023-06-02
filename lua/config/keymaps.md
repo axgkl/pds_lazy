@@ -26,7 +26,7 @@ brackets, e.g. `<Enter>` (we don't clutter the tables with backticks).
 | Mapping   | M   | What            | How | Cmt                       |
 | -------   | --- | --------------- | --- | ------------------------- |
 | <C-i>     | 🟣  | Fold open       | zR  | " folds                   |
-| <BS> | 🟣  | Toggle fold     | za  |
+| <Enter>   | 🟣  | Toggle fold     | za  | bufferlocal
 | <S-Tab>   | 🟣  | Close ALL Folds | zM  | <C-i> is ident with <TAB> |
 
 Type z and let which key help you, regarding other options
@@ -121,7 +121,8 @@ we use leap.nvim -> s, S, gs, gS
 | ---------- | --- | --------------------- | ----------------------------------------- | ------------------------------------ |
 | ,1         | 🟣  | Reload init.lua       | :source ~/.config/nvim/init.lua ⏎         |                                      |
 | ,2         | 🟣  | Edit init.lua         | :edit ~/.config/nvim/lua/user/init.lua ⏎  |                                      |
-| ,3         | 🟣  | Term in dir of buf    | `require("lazyvim.util").float_term()` |
+| ,3         | 🟣  | Term in dir of buf    | `require("lazyvim.util").float_term(nil,{cwd=vim.fn.expand("%:p:h")})` |
+| ,A         | 🟣  | Alpha Dashboard       | :Alpha  ⏎ 
 | ,C         | 🟣  | Color Schemes         | `TS().colorscheme({enable_preview=true})` |
 | ,E         | 🟣  | Vim Eval Into         | :EvalInto ⏎                               |
 | ,E         | 🟢  | Vim Eval Into         | :EvalInto ⏎                               |
@@ -134,6 +135,9 @@ we use leap.nvim -> s, S, gs, gS
 | <M-H>      | 🟣  | pds help              | :edit ~/.config/nvim/lua/user/README.md ⏎ |
 | gq         | 🟠  | Format w/o formatexpr | gwgw                                      |
 | ⏎          | 🟠  | Fold all open         | zO                                        |
+
+
+
 
 ## Usage
 
@@ -234,10 +238,13 @@ def add_line(l, add=add):
         #if how[0] == ':': how += ' ⏎'
         how = how.replace('"', '\\"')
         how = f'"{how}"'
+    bufferlocal = ''
     if cmt:
         add(f'-- {cmt}')
+        if 'bufferlocal' in cmt:
+            bufferlocal=', buffer=true'
     what = f', desc = "{what}" ' if what else ''
-    add(f'["{key}"] = {{ {how}{what} }},')
+    add(f'["{key}"] = {{ {how}{what}{bufferlocal} }},')
 
 def add_mode(m, defs, add=add, s=s):
     add(f'{m} = {{')

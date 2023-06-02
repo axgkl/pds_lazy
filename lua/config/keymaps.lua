@@ -22,7 +22,8 @@ local maps = {
 	n = {
 		-- " folds
 		["<C-i>"] = { "zR", desc = "Fold open" },
-		["<BS>"] = { "za", desc = "Toggle fold" },
+		-- bufferlocal
+		["<Enter>"] = { "za", desc = "Toggle fold", buffer = true },
 		-- <C-i> is ident with <TAB>
 		["<S-Tab>"] = { "zM", desc = "Close ALL Folds" },
 		-- Close just a split or a tab
@@ -138,10 +139,11 @@ local maps = {
 		[",2"] = { ":edit ~/.config/nvim/lua/user/init.lua<CR>", desc = "Edit init.lua" },
 		[",3"] = {
 			function()
-				require("lazyvim.util").float_term()
+				require("lazyvim.util").float_term(nil, { cwd = vim.fn.expand("%:p:h") })
 			end,
 			desc = "Term in dir of buf",
 		},
+		[",A"] = { ":Alpha <CR>", desc = "Alpha Dashboard" },
 		[",C"] = {
 			function()
 				TS().colorscheme({ enable_preview = true })

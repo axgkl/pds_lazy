@@ -5,6 +5,7 @@ return {
   "godlygeek/tabular",
   "junegunn/limelight.vim",
   "mbbill/undotree",
+  "tpope/vim-surround",
   -- kshenoy/vim-signature
   {
     "simrat39/symbols-outline.nvim", -- the symbols split window

@@ -6,3 +6,9 @@ nnoremap <buffer> k k
 nnoremap <buffer> gk gk
 setlocal wrap
 setlocal colorcolumn=
+" quickfix enter should jump to location, e.g. after code-R (backrefs)
+nnoremap <buffer> <Enter> <Enter>
+
+
+
+

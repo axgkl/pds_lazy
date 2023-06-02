@@ -40,6 +40,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
       -- add tsx and treesitter
+      opts.indent = { enable = true, disable = { "python" } }
+      opts.highlight = { enable = true, disable = { "sh", "bash" } }
       vim.list_extend(opts.ensure_installed, {
         "bash",
         "html",

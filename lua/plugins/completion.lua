@@ -42,7 +42,6 @@ return {
         mapping = {
           ["<M-p>"] = cmp.mapping.select_prev_item(),
           ["<M-n>"] = cmp.mapping.select_next_item(),
-          ["<S-n>"] = cmp.mapping.select_next_item(),
           ["<S-Tab>"] = cmp.mapping.select_prev_item(),
           ["<Tab>"] = cmp.mapping.select_next_item(),
           ["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -70,7 +69,7 @@ return {
           { name = "buffer",        keyword_length = 3 },
           { name = "calc" },
           { name = "dictionary",    priority = 0.1 },
-          { name = "github_handles" },           -- from ./lua/cmp/github_handles.lua
+          { name = "github_handles" }, -- from ./lua/cmp/github_handles.lua
           { name = "luasnip",       priority = 100 },
         },
         -- formatting = {

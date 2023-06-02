@@ -11,7 +11,8 @@ setlocal foldenable
 let g:SimpylFold_docstring_preview = 1
 map ,b Obreakpoint() # FIXME BREAKPOINT<C-c>
 
-" map ,e   Otry:<Esc>j^i<TAB><Esc>oexcept Exception as ex:<CR>print('breakpoint set')<CR>breakpoint()<CR>keep_ctx=True<Esc>^
+"map ,e   Otry:<Esc>j^i<TAB><Esc>oexcept Exception as ex:<CR>print('breakpoint set')<CR>breakpoint()<CR>keep_ctx=True<Esc>^
+map ,e   yyppkkCtry:<Esc>j^i<TAB><Esc>j^Cexcept Exception as ex:<CR>print('breakpoint set')<CR>breakpoint()<CR>keep_ctx=True<Esc>^
 " map ,l J0fdxxxxf(xi=lambda <Esc>f)xllcw
 " nmap <C-Left> <Nop>
 "

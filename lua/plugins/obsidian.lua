@@ -8,7 +8,7 @@ local options = {
     folder = "notes/dailies",
   },
   completion = {
-    nvim_cmp = true,
+    nvim_cmp = false,
   },
   note_id_func = function(title)
     -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
@@ -98,14 +98,13 @@ return {
       end
     end, { noremap = false, expr = true })
   end,
-
   init = function()
     local lazy_setup = function()
       -- Configure completion...
       -- Add source.
       local cmp = require("cmp")
       local sources = {
-        { name = "obsidian", option = options },
+        { name = "obsidian",     option = options },
         { name = "obsidian_new", option = options },
       }
       for _, source in pairs(cmp.get_config().sources) do
