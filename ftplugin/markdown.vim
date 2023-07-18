@@ -26,6 +26,10 @@ let g:markdown_fenced_languages = [ "vim", "python", "lua", "bash=sh", "javascri
 let g:mkdp_browser = expand($BROWSER)
 let g:mkdp_theme = 'dark'
 let g:mkdp_echo_preview_url = 1
+let g:mkdp_preview_options = { 'uml': {'server': 'https://uml.axiros.com/plantuml'}}
+"let g:mkdp_auto_start = 1
+let g:mkdp_markdown_css = $HOME . "/.config/nvim/ftplugin/markdown.css"
+
 
 let g:limelight_paragraph_span = 1
 let g:limelight_conceal_guifg = '#999999'

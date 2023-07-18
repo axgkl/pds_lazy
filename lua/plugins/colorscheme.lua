@@ -7,7 +7,6 @@ return {
     },
   },
   "arcticicestudio/nord-vim",
-  "catppuccin/nvim",
   "cocopon/iceberg.vim",
   "cormacrelf/vim-colors-github",
   "ellisonleao/gruvbox.nvim",
@@ -16,5 +15,13 @@ return {
   "joshdick/onedark.vim",
   "matsuuu/pinkmare",
   "rebelot/kanagawa.nvim",
-  "rose-pine/neovim",
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    config = {
+      --https://rosepinetheme.com/palette/ingredients/
+      disable_background = false,
+      groups = { error = "pine" },
+    },
+  },
 }
