@@ -6,5 +6,6 @@ return {
     build = "cd app && npm install && git reset --hard",
   },
   { "mikeboiko/vim-markdown-folding", ft = "markdown" }, -- better than TS
-  { "preservim/vim-markdown", ft = "markdown" },
+  { "preservim/vim-markdown",         ft = "markdown" }, -- can fold but has gq problems - we address in markdown ftplugin
+  --{ "tpope/vim-markdown", ft = "markdown" },
 }

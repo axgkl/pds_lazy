@@ -1,6 +1,13 @@
 " Kills conceal of bold / italic
-
+"setl formatoptions-=q
+" setl formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*\[-*+]\\s\\+
 "colorscheme tokyonight
+
+" https://github.com/preservim/vim-markdown/issues/390
+let g:vim_markdown_auto_insert_bullets=0
+let g:vim_markdown_new_list_item_indent=0
+au FileType markdown setlocal formatlistpat=^\\s*\\d\\+[.\)]\\s\\+\\\|^\\s*[*+~-]\\s\\+\\\|^\\(\\\|[*#]\\)\\[^[^\\]]\\+\\]:\\s | setlocal comments=n:> | setlocal formatoptions+=cn
+" set comments=fb:*,fb:+,fb:-,n:> indentexpr=
 setl colorcolumn=
 setl conceallevel=2
 " -- linebreak soft wrap at words

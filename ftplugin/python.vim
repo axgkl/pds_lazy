@@ -4,7 +4,6 @@
 " hi! link Conceal Operator
 "
 " setlocal conceallevel=1
-
 setlocal textwidth=200
 " setlocal foldmethod=indent
 setlocal foldenable

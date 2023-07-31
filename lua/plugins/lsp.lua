@@ -10,6 +10,8 @@ return {
       autoformat = false, -- we use ,w to format and write. can't reformat other peoples code on small changes
       -- ---@type lspconfig.options
       servers = {
+        remark_ls = { settings = { bullet = "-" } }, -- does not work, we need ~/.remarkrc.yml
+        pyright = {},
         marksman = {
           --root_dir = require("lspconfig.util").root_pattern({ ".git" }),
         },
@@ -40,6 +42,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
       -- add tsx and treesitter
+      --opts.sync_install = true
       opts.indent = { enable = true, disable = { "python" } }
       opts.highlight = { enable = true, disable = { "sh", "bash" } }
       vim.list_extend(opts.ensure_installed, {
@@ -53,9 +56,9 @@ return {
         "python",
         "query",
         "regex",
-        "tsx",
         "typescript",
         "vim",
+        "vimdoc",
         "yaml",
       })
     end,
@@ -73,6 +76,7 @@ return {
         "blue",
         "flake8",
         "marksman",
+        "remark-language-server",
         "pyright",
         "shellcheck",
         "shfmt",
