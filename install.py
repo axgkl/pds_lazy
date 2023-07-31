@@ -246,7 +246,7 @@ def main():
     a = sys.argv[1:]
     if not a or '-h' in a or '--help' in a:
         sys.exit(help())
-    if not RP or exists(RP):
+    if not RP or not exists(RP):
         print('No $MAMBA_ROOT_PREFIX')
         sys.exit(help())
     if 's' in a or 'status' in a:
