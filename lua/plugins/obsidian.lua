@@ -81,7 +81,8 @@ return {
     -- "ibhagwan/fzf-lua"
     -- Optional, alternative to nvim-treesitter for syntax highlighting.
     "godlygeek/tabular",
-    "preservim/vim-markdown",
+    --"preservim/vim-markdown",
+    --"tpope/vim-markdown",
   },
   opts = options,
   config = function(_, opts)
