@@ -14,13 +14,22 @@ pynvim ...).
 
 ## Installation
 
+### No Micromamba
+
+-   `./install mm` (and confirm the defaults. Will install micromamba with git and python if not present)
+-   `source .bashrc` (or re-enter your shell)
+-   `./install all`  (will backup any existing nvim files, then clones this repo if not present and runs the python installer)
+
+Requires: curl and bzip2.
+
+### Micromamba and python already present
+
+Assumption: This repo already in `~/.config/nvim`. If not: run `./install all`
+
 -   Backup any existing files you want to keep
--   Install [micromamba][mm], potentially with `git` and `python` (required for the
-    to clone and run installer)
--   Clone this repo into `~/.config/nvim`
--   Run `./install clean`. If you have problems with us deleting the shown assets of any
+-   Run `./install.py clean`. If you have problems with us deleting the shown assets of any
     existing nvim installation: quit and back them up
--   Run `./install i`
+-   Run `./install.py i`
 
 The installer will create
 
@@ -35,6 +44,6 @@ The installer will create
 ## Usage
 
 This repo provides an IDE focussed for python, markdown, bash and web development.
-If you require more/other tools, modify the tools given in [installer](./install) and the plugin and config within this repo, then push to your own repo and install.
+If you require more/other tools, modify the tools given in [installer](./install.py) and the plugin and config within this repo, then push to your own repo and install.
 
 [mm]: https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html
