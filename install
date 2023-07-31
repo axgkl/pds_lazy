@@ -20,7 +20,6 @@ ARGUMENTS:
 """
 
 import os, shutil, sys, json
-import requests
 
 PKG = [
     'fzf',
@@ -72,16 +71,16 @@ def info(msg, **kw):
     print(msg, kw, file=sys.stderr)
 
 
-def download_file(url, local_filename):
-    local_filename = abspath(local_filename)
-    d = dirname(local_filename)
+def download_file(url, fn):
+    fn = abspath(fn)
+    if exists(fn):
+        info('exists already', fn=fn)
+    d = dirname(fn)
     os.makedirs(d, exist_ok=True)
-
-    info('Downloading', url=url, to=local_filename)
-    r = requests.get(url, stream=True)
-    fn = local_filename
-    with open(fn, 'wb') as f:
-        shutil.copyfileobj(r.raw, f)
+    info('Downloading', url=url, to=fn)
+    err = os.system(f'wget "{url}" -O "{fn}"')
+    if err:
+        system(f'curl -L "{url}" > "{fn}"')
 
 
 _ = lambda i: i if isinstance(i, list) else [i, i]
@@ -165,7 +164,7 @@ class mamba:
             if cmd in req_in_env and not exists(mamba.bindir() + f'/{cmd}'):
                 ret.append(pkg)
         if ret:
-            system(f'{MM} install -n nvim -y {" ".join(ret)}')
+            system(f'{MM} install -c conda-forge -n nvim -y {" ".join(ret)}')
         _ = ' '.join(editor_pips)
         system(f'{mamba.bindir()}/pip install {_}')
         [binlink(cmd) for cmd in inst_cmd if not cmd in req_in_env]
