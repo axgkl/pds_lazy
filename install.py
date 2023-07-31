@@ -209,10 +209,14 @@ class Action:
     def clean():
         m = get_installed()
         rm = m['installed'] + m['symlinks']
+        if not rm:
+            print('all clean')
+            return
         if sys.stdin.isatty():
             k = '\n- ' + '\n- '.join(rm) + '\n'
             if not 'y' in input(f'Remove {k} [y|N]? ').lower():
-                sys.exit(print('unconfirmed'))
+                print('unconfirmed')
+                sys.exit(1)
         for d in rm:
             system(f'rm -rf "{d}"')
 

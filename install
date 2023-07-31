@@ -56,7 +56,7 @@ function install_repo {
 
 function install_nvim {
     cd "$HOME/.config/nvim"
-    python ./install.py clean
+    python ./install.py clean || die "could not clean"
     python ./install.py install
 }
 
