@@ -15,7 +15,5 @@
 ## Usage
 
 This repo provides an IDE focussed for python, markdown, bash and web development.
-If you require more/other tools, modify the tools given in [installer]('./install') and
-the plugin and config within this repo, then push to your own repo and install.
-
+If you require more/other tools, modify the tools given in [installer](./install) and the plugin and config within this repo, then push to your own repo and install.
 [mm]: https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html
