@@ -43,6 +43,9 @@ The installer will create
 
 ## Usage
 
+
+
+
 This repo provides an IDE focussed for python, markdown, bash and web development.
 If you require more/other tools, modify the tools given in [installer](./install.py) and the plugin and config within this repo, then push to your own repo and install.
 

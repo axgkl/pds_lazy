@@ -120,7 +120,7 @@ class nvim:
         """
         vi = d_bin + '/vi'
         write_file(vi, s, chmod=0o755)
-        
+
         s = """#!/usr/bin/env sh
         echo "zig XX : $*" >> /tmp/nvim_zig.log
         zig XX "$@"
@@ -211,7 +211,7 @@ class Action:
         mamba.install()
         info('running nvim. libfzf.so error is ok, will be compiled')
         system(f'{mamba.bindir()}/vi --headless -c quitall')
-        post.write_remark_config()
+        post.make_remark_work_globally()
         return Action.status()
 
     def clean():
@@ -232,14 +232,19 @@ class Action:
 class post:
     """Post install functions"""
 
-    def write_remark_config():
+    def make_remark_work_globally():
+        # https://github.com/orgs/remarkjs/discussions/960#discussioncomment-6848513
         # otherwise we have * as list marks and frontmatter screwups:
         fn = H + '/.remarkrc.yml'
-        if exists(fn):
-            return
-        info('writing', fn=fn)
-        s = 'settings:\n  bullet: "-"\n  rule: "-"\n'
-        write_file(fn, s)
+        if not exists(fn):
+            info('writing', fn=fn)
+            s = 'settings:\n  bullet: "-"\n  rule: "-"\n'
+            write_file(fn, s)
+        system(f'cd $HOME; PATH="{mamba.bindir()}:$PATH"; npm install remark')
+        write_file(
+            H + '/node_modules/README.md',
+            'Required for remark to work globally',
+        )
 
 
 def help():
