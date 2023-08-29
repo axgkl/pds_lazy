@@ -1,12 +1,20 @@
 # vim:ft=sh
 # sourced in .bashrc or .zshrc
-alias ff='fd --no-ignore --hidden'
 function h { history | grep --color=auto -i "$1"; }
 function cd {
     builtin cd "$@" || return
     test -f 'environ' && source ./environ
 }
+function gomod {
+    local mod="${1:-os}"
+    local l="$(python -c "import os, $mod;print(os.path.dirname($mod.__file__))")"
+    cd "$l"
+    pwd
+}
+
 alias ack="rg --glob='!spell' --no-ignore --glob '!*/arch/*'" # not respect gitignore
+alias ff='fd --no-ignore --hidden'
+alias gc='git commit' 
 alias gs='git status'
 alias gd='git diff'
 alias lg='lazygit'
