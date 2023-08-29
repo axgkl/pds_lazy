@@ -22,6 +22,8 @@ ARGUMENTS:
 import os, shutil, sys, json
 
 PKG = [
+    'bat',
+    'exa',
     'fzf',
     'git',
     'lazygit',
@@ -43,6 +45,14 @@ abspath = os.path.abspath
 H = os.environ.get('HOME', '')
 MM = 'micromamba'
 RP = os.environ.get('MAMBA_ROOT_PREFIX')
+
+
+def read_file(fn):
+    try:
+        with open(fn) as fd:
+            return fd.read()
+    except:
+        return ''
 
 
 def write_file(fn, s, chmod=None):
@@ -212,6 +222,7 @@ class Action:
         info('running nvim. libfzf.so error is ok, will be compiled')
         system(f'{mamba.bindir()}/vi --headless -c quitall')
         post.make_remark_work_globally()
+        [post.source_shell_helpers(f) for f in (H + '/.bashrc', H + '/.zshrc')]
         return Action.status()
 
     def clean():
@@ -245,6 +256,13 @@ class post:
             H + '/node_modules/README.md',
             'Required for remark to work globally',
         )
+
+    def source_shell_helpers(fn: str):
+        s = read_file(fn)
+        if not s or 'shell_helpers' in s:
+            return
+        h = H + '/.config/nvim/shell_helpers'
+        write_file(fn, s + f'\nsource "{h}"\n')
 
 
 def help():

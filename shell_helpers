@@ -1,0 +1,14 @@
+# vim:ft=sh
+# sourced in .bashrc or .zshrc
+alias ff='fd --no-ignore --hidden'
+function h { history | grep --color=auto -i "$1"; }
+function cd {
+    builtin cd "$@" || return
+    test -f 'environ' && source ./environ
+}
+alias ack="rg --glob='!spell' --no-ignore --glob '!*/arch/*'" # not respect gitignore
+alias gs='git status'
+alias gd='git diff'
+alias lg='lazygit'
+alias ll='exa -l -g --icons --sort newest --reverse --group-directories-first --color=always'
+alias mm='micromamba'
