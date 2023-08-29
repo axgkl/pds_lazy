@@ -14,9 +14,13 @@ function gomod {
 
 alias ack="rg --glob='!spell' --no-ignore --glob '!*/arch/*'" # not respect gitignore
 alias ff='fd --no-ignore --hidden'
-alias gc='git commit' 
+alias fff='fd --no-ignore --hidden --follow'
+alias gc='git commit'
 alias gs='git status'
-alias gd='git diff'
+alias gd='git diff --color'
+alias gp='git pull'
+alias gP='git push'
 alias lg='lazygit'
 alias ll='exa -l -g --icons --sort newest --reverse --group-directories-first --color=always'
 alias mm='micromamba'
+alias scu='systemctl --user'
