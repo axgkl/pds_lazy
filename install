@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+REPO="https://github.com/AXGKl/pds_lazy.git"
+
+D="Installs micromamba if not present, incl. python and git
+
+Then clones this repo ($R) if not present at ~/.config/nvim and runs the nvim installer.
+
+Arguments:
+    mm|micromamba) Installs micromamba, incl. git and python if not present. 
+    all)           Runs mm, then clones repo and install nvim (Backs up existing setup into nvim_backup.tgz in your \$HOME)
+
+Requires:
+
+- bzip2
+- curl
+
+"
+
+function die {
+    echo "$*"
+    exit 1
+}
+
+function help { echo -e "$D"; }
+
+function install_micromamba {
+    type micromamba && return 0
+    "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
+    type micromamba || die "could not install micromamba"
+}
+
+function install_root {
+    type "$1" && return
+    micromamba install -n base "$1"
+    ln -s "$HOME/micromamba/bin/$1" "$HOME/.local/bin/$1"
+    type "$1" || die "could not install $1"
+}
+
+function install_mm {
+    install_micromamba
+    install_root git
+    install_root python
+}
+function backup_move {
+    cd "$HOME"
+    tar cfvz nvim_backup.tgz ".config/nvim" ".local/share/nvim" ".cache/nvim"
+    rm -rf ".config/nvim"
+}
+
+function install_repo {
+    mkdir -p "$HOME/.config"
+    test -e "$HOME/.config/nvim/install.py" && return 0
+    test -e "$HOME/.config/nvim" && (backup_move)
+    git clone "$REPO" "$HOME/.config/nvim"
+}
+
+function install_nvim {
+    cd "$HOME/.config/nvim"
+    python ./install.py clean || die "could not clean"
+    python ./install.py install
+}
+
+function main {
+    case "$1" in
+        all)
+            install_mm
+            install_repo
+            install_nvim
+            ;;
+        mm | micromamba)
+            install_mm
+            ;;
+        *) help ;;
+    esac
+}
+
+main "$@"
