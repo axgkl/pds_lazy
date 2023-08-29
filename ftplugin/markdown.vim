@@ -76,6 +76,8 @@ nmap <silent><buffer> ,p :call TogglePresent()<CR>
 nmap <silent><buffer> ,P :MarkdownPreviewToggle<CR>
 
 nnoremap ,T    vip:Tabularize/\|<CR>
+nmap ,i    ysiw*
+nmap ,b    ysiw*lysiw*
 
 " Syntax
 " In syntax markdown.vim, must be loaded after
