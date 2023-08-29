@@ -109,16 +109,24 @@ class nvim:
             os.system(
                 'chmod u+x nvim.appimage && ./nvim.appimage --appimage-extract'
             )
+        # https://github.com/nvim-treesitter/nvim-treesitter/issues/5098#issuecomment-1696643687
         # zig is the better compiler. E.g.
         s = f"""#!/usr/bin/env sh
-        export CC="zig cc"
-        export CXX="zig c++"
-        fn="$(readlink -vf "$0")"
+        export CC="zigcc"
+        export CXX="zigc++"
+        fn="$(readlink -vf "$0")" # micromamba/env/nvim/bin
         export PATH="$(dirname "$fn"):$PATH"
         {d_bin}/squashfs-root/usr/bin/nvim "$@"
         """
         vi = d_bin + '/vi'
         write_file(vi, s, chmod=0o755)
+        
+        s = """#!/usr/bin/env sh
+        echo "zig XX : $*" >> /tmp/nvim_zig.log
+        zig XX "$@"
+        """
+        write_file(d_bin + '/zigcc', s.replace(' XX ', ' cc '), chmod=0o755)
+        write_file(d_bin + '/zigc++', s.replace(' XX ', ' c++ '), chmod=0o755)
         info(f'{vi} present')
         binlink('vi')
         return {'nvim': t.status()}
