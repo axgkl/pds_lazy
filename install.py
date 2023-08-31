@@ -19,7 +19,7 @@ ARGUMENTS:
 - clean: Remove all existing nvim, except this config (asks for confirmation)
 """
 
-import os, shutil, sys, json
+import platform, os, shutil, sys, json
 
 PKG = [
     'bat',
@@ -263,6 +263,50 @@ class post:
             return
         h = H + '/.config/nvim/shell_helpers'
         write_file(fn, s + f'\nsource "{h}"\n')
+        
+class binenv:
+    archi = platform.machine().replace('x86_', 'amd').lower()
+    url_binenv = f'https://github.com/devops-works/binenv/releases/download/v0.19.8/binenv_{platform.uname()[0]}_{archi}'
+    have_wget = os.system('type wget 2>/dev/null 1>/dev/null') == 0
+
+    @staticmethod
+    def die(msg):
+        print(msg)
+        sys.exit(1)
+
+    @staticmethod
+    def run(cmd, diemsg=None):
+        print(cmd, file=sys.stderr)
+        err = os.system(cmd)
+        if not diemsg or not err:
+            return err
+        binenv.die(diemsg)
+
+    @staticmethod
+    def download(url, fn, chmod=None):
+        if os.path.exists(fn) and os.stat(fn).st_size == 0:
+            os.unlink(fn)
+        if not os.path.exists(fn):
+            os.makedirs(os.path.dirname(fn), exist_ok=True)
+            if binenv.have_wget:
+                cmd = f'wget -q  "{url}" -O "{fn}"'
+            else:
+                cmd = f'curl -s "{url}" -o "{fn}"'
+            binenv.run(cmd, f'could not download {url}')
+        if chmod:
+            os.chmod(fn, chmod)
+
+    @staticmethod
+    def bootstrap(bindir=os.environ['HOME'] + '/.local/bin'):
+        binenv.die(f'Not found: {bindir}') if not os.path.exists(bindir) else 0
+        os.environ['BINENV_BINDIR'] = bindir
+        os.environ['BINENV_LINKDIR'] = bindir
+        tmp = f'/tmp/{os.environ["USER"]}/binenv'
+        os.makedirs(os.path.dirname(tmp), exist_ok=True)
+        binenv.download(binenv.url_binenv, tmp, chmod=0o755)
+        binenv.run(f'{tmp} update')
+        binenv.run(f'{tmp} install binenv')
+
 
 
 def help():
