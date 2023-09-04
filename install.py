@@ -125,7 +125,7 @@ class nvim:
         export CC="zigcc"
         export CXX="zigc++"
         fn="$(readlink -vf "$0")" # micromamba/env/nvim/bin
-        export PATH="$(dirname "$fn"):$PATH"
+        export PATH="$PATH:$(dirname "$fn")" # last so that conda python's are found first
         {d_bin}/squashfs-root/usr/bin/nvim "$@"
         """
         vi = d_bin + '/vi'
