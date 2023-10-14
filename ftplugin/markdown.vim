@@ -9,7 +9,7 @@ let g:vim_markdown_new_list_item_indent=0
 au FileType markdown setlocal formatlistpat=^\\s*\\d\\+[.\)]\\s\\+\\\|^\\s*[*+~-]\\s\\+\\\|^\\(\\\|[*#]\\)\\[^[^\\]]\\+\\]:\\s | setlocal comments=n:> | setlocal formatoptions+=cn
 " set comments=fb:*,fb:+,fb:-,n:> indentexpr=
 setl colorcolumn=
-setl conceallevel=2
+setl conceallevel=0
 " -- linebreak soft wrap at words
 setl linebreak 
 " using mikeboiko/vim-markdown-folding, fixing the original for header display
@@ -76,8 +76,8 @@ nmap <silent><buffer> ,p :call TogglePresent()<CR>
 nmap <silent><buffer> ,P :MarkdownPreviewToggle<CR>
 
 nnoremap ,T    vip:Tabularize/\|<CR>
-nmap ,i    ysiw*
-nmap ,b    ysiw*lysiw*
+nmap <buffer> ,i    ysiw*
+nmap <buffer> ,b    ysiw*lysiw*
 
 " Syntax
 " In syntax markdown.vim, must be loaded after

@@ -45,6 +45,16 @@ return {
       --opts.sync_install = true
       opts.indent = { enable = true, disable = { "python" } }
       opts.highlight = { enable = true, disable = { "sh", "bash" } }
+      opts.incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<M-space>",
+          node_incremental = "<M-space>",
+          scope_incremental = false,
+          node_decremental = "<bs>",
+        },
+      }
+
       vim.list_extend(opts.ensure_installed, {
         "bash",
         "html",
@@ -74,7 +84,7 @@ return {
       ensure_installed = {
         "bash-language-server",
         "blue",
-        "flake8",
+        "ruff",
         "marksman",
         "remark-language-server",
         "pyright",
