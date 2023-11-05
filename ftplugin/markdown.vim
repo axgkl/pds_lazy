@@ -76,7 +76,7 @@ nmap <silent><buffer> ,p :call TogglePresent()<CR>
 nmap <silent><buffer> ,P :MarkdownPreviewToggle<CR>
 
 nnoremap ,T    vip:Tabularize/\|<CR>
-nmap <buffer> ,i    ysiw*
+nmap <buffer> ,i    ysiw_
 nmap <buffer> ,b    ysiw*lysiw*
 
 " Syntax

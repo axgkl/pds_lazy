@@ -1,0 +1,43 @@
+snippet ruff
+	[tool.ruff]
+  # https://docs.astral.sh/ruff/rules/
+	line-length = 90
+	extend-select = ["Q"]
+	select = ["E", "F", "B"] # Enable flake8-bugbear ('B') rules.
+	ignore = [
+		"E501", # Never enforce 'E501' (line length violations).
+		"E741", # short var names
+		"B006", # mutables in signature
+	]
+
+	[tool.ruff.lint]
+	fixable = ["ALL"]
+	unfixable = [
+		"B",    # Avoid trying to fix flake8-bugbear ('B') violations.
+		"F401", # Unused Import
+		"F841", # variable assigned but not used
+	]
+
+	[tool.ruff.flake8-quotes]
+	docstring-quotes = "double"
+	inline-quotes = "single"
+
+	[tool.pyright]
+	# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+	# ruff is enough
+	reportSelfClsParameterName = false
+	pythonPlatform = "Linux"
+	typeCheckingMode = "off"
+	reportMissingImports = false
+	reportMissingTypeStubs = false
+	reportUndefinedVariable = false
+	reportGeneralTypeIssues = false
+	reportUnusedExpression = false
+	root = "src"
+	include = ["src", "tests"]
+  # pythonVersion = "3.8"
+	executionEnvironments = [{ root = "src" }, { root = "tests" }]
+
+
+
+

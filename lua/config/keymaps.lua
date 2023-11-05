@@ -9,15 +9,6 @@ end
 function UU()
 	return require("user.utils")
 end
-function FmtAndSave()
-	local buf = vim.api.nvim_get_current_buf()
-	local ft = vim.bo[buf].filetype
-	if #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0 then
-		vim.lsp.buf.format({ async = true })
-	end
-	vim.cmd("update")
-end
-
 local maps = {
 	n = {
 		-- " folds
@@ -50,7 +41,7 @@ local maps = {
 			desc = "Git files",
 		},
 		-- in your open buffers (toggle back and forth) :b# ⏎ " previous buffer
-		["<leader><enter>"] = { ":ls<CR>:b#<CR><Space>", desc = "Previous edited buffer" },
+		["<leader><enter>"] = { ":b#<CR><Space>", desc = "Previous edited buffer" },
 		-- Move stuff you want to keep below a `begin_ archive` comment and G jumps to that
 		["G"] = { ":$<CR><bar>:silent! ?begin_archive<CR>", desc = "End of file" },
 		-- You can open many files at once, by selecting them with TAB in the picker
@@ -75,12 +66,7 @@ local maps = {
 		[",d"] = { ":wq!<CR>", desc = "Done - write quit" },
 		-- See [here][autosave]  (Poccos' version is not respecting disable opt)
 		[",s"] = { ":ASToggle<CR>", desc = "Toggle Autosave all buffers" },
-		[",w"] = {
-			function()
-				FmtAndSave()
-			end,
-			desc = "Format And Save",
-		},
+		[",w"] = { ":w! <CR>", desc = "Format" },
 		["<C-s>"] = { "w!", desc = "Save File" },
 		["<Down>"] = {
 			function()
@@ -135,11 +121,25 @@ local maps = {
 			end,
 			desc = "Find References",
 		},
+		-- gr as well but in hover
+		["<M-Down>"] = {
+			function()
+				require("trouble").next({ skip_groups = true, jump = true })
+			end,
+			desc = "Next Trouble Loc",
+		},
+		-- gr as well but in hover
+		["<M-Up>"] = {
+			function()
+				require("trouble").next({ skip_groups = true, jump = true })
+			end,
+			desc = "Prev Trouble Loc",
+		},
 		[",1"] = { ":source ~/.config/nvim/init.lua<CR>", desc = "Reload init.lua" },
 		[",2"] = { ":edit ~/.config/nvim/lua/user/init.lua<CR>", desc = "Edit init.lua" },
 		[",3"] = {
 			function()
-				require("lazyvim.util").float_term(nil, { cwd = vim.fn.expand("%:p:h") })
+				require("lazyvim.util").terminal.open(nil, { cwd = vim.fn.expand("%:p:h") })
 			end,
 			desc = "Term in dir of buf",
 		},
@@ -167,16 +167,20 @@ local maps = {
 		[",E"] = { ":EvalInto<CR>", desc = "Vim Eval Into" },
 		[",r"] = { ":<C-U> call PyEvalSelection('Eval', visualmode())<CR>", desc = "VimPythonEval" },
 	},
-	v = {
-		["<leader>d"] = { '"_d', desc = "Delete noregister" },
-		["gq"] = { "gwgw", desc = "Format w/o formatexpr" },
-		["⏎"] = { "zO", desc = "Fold all open" },
-	},
 	i = {
+		-- The autobrackets often make superfluos 2 brackets
+		["<C-d>"] = { "<Esc>lxA", desc = "Rm next bracket" },
+		-- Jump over next char (closing bracket in insert mode)
+		["<r-j>"] = { "<C-O>a", desc = "Jump over closing" },
 		["<M-j>"] = { "<ESC><C-W><C-W>", desc = "Jump Left Split" },
 		["<M-k>"] = { "<ESC><C-W><C-W>", desc = "Jump Right Split" },
 		-- " Jump to end of line in insert mode
 		["<C-E>"] = { "<C-O>A" },
+	},
+	v = {
+		["<leader>d"] = { '"_d', desc = "Delete noregister" },
+		["gq"] = { "gwgw", desc = "Format w/o formatexpr" },
+		["⏎"] = { "zO", desc = "Fold all open" },
 	},
 }
 

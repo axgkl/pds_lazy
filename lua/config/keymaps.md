@@ -18,7 +18,7 @@ brackets, e.g. `<Enter>` (we don't clutter the tables with backticks).
   - [Helpers](#helpers) - [Arch](#arch) - [Links](#links) - [Parser](#parser) - [Code](#code)
   <!--toc:end-->
 
-👉 All default AstroNVim Shortcuts: https://astronvim.github.io/Basic%20Usage/mappings  
+👉 All default Shortcuts: https://www.lazyvim.org/configuration/keymaps
 👉 `:map` lists them all  
 
 ## Folding
@@ -44,7 +44,7 @@ Type z and let which key help you, regarding other options
 | <M-o>           | 🟣  | Jump newer (after C-o)        | <C-i>                                                           | C-o jump older -> alt-o is jump newer (since C-i is tab which we need elsewhere) |
 | <M-w>           | 🟣  | Buffer delete :bd!            | :bd! ⏎                                                          | Close window                                                                     |
 | <leader>fg      | 🟣  | Git files                     | `TS().git_files()`                                              |
-| <leader><enter> | 🟣  | Previous edited buffer        | :ls<CR>:b#<CR><Space>                                           | in your open buffers (toggle back and forth) :b# ⏎ " previous buffer             |
+| <leader><enter> | 🟣  | Previous edited buffer        | :b#<CR><Space>                                                  | in your open buffers (toggle back and forth) :b# ⏎ " previous buffer             |
 | G               | 🟣  | End of file                   | :$<CR><bar>:silent! ?begin-UNDER-archive ⏎                      | Move stuff you want to keep below a `begin_ archive` comment and G jumps to that |
 | ff              | 🟣  | Open file(from vi start dir)  | `TS().find_files()`                                             | You can open many files at once, by selecting them with TAB in the picker        |
 | gw              | 🟣  | Live grep words               | `TS().live_grep()`                                              | 🟥 gw reformat via gq                                                            |
@@ -65,7 +65,9 @@ Type z and let which key help you, regarding other options
 | --------- | --- | --------------------------- | --------------------------------                | ---------------------------------------------------------------------------- |
 | ,d        | 🟣  | Done - write quit           | :wq! ⏎                                          |
 | ,s        | 🟣  | Toggle Autosave all buffers | :ASToggle ⏎ | See [here][autosave]  (Poccos' version is not respecting disable opt)        |
-| ,w        | 🟣  | Format And Save             | `FmtAndSave()`
+| ,w        | 🟣  | Format                      | :w!  ⏎                    
+| <C-d>     | 🟤  | Rm next bracket             | <Esc>lxA                                        | The autobrackets often make superfluos 2 brackets
+| <r-j>     | 🟤  | Jump over closing           | <C-O>a                                          | Jump over next char (closing bracket in insert mode)
 | <C-s>     | 🟣  | Save File                   | w!                                              |
 | <Down>    | 🟣  | Resize split down           | `SS().resize_down(2)`                           |
 | <Left>    | 🟣  | Resize split left           | `SS().resize_left(2)`                           |
@@ -100,14 +102,15 @@ Type z and let which key help you, regarding other options
 | J       | 🟣  | Jump paragraph down         | }j              | 🟥 J won't line-join. fj for that   |
 | K       | 🟣  | Jump paragraph up           | {k{kk}j         |
 
-we use leap.nvim -> s, S, gs, gS
 
-## LSP
+## LSP / Coding
 
 | Mapping    | M   | What               | How                           | Cmt                     |
 | -------    | --- | ------------------ | ----------------------------- | ---                     |
 | ,D         | 🟣  | Buffer Diagnostics | `TS().diagnostics({bufnr=0})` |
 | <leader>cR | 🟣  | Find References    | `vim.lsp.buf.references()`    | gr as well but in hover
+| <M-Down>   | 🟣  | Next Trouble Loc   | `require("trouble").next({skip_groups = true, jump = true});`    | gr as well but in hover
+| <M-Up>     | 🟣  | Prev Trouble Loc   | `require("trouble").next({skip_groups = true, jump = true});`    | gr as well but in hover
 
 - `gd` Goto definition (e.g. over function name)
 - `<leader>cr` Rename e.g. function name
@@ -121,7 +124,7 @@ we use leap.nvim -> s, S, gs, gS
 | ---------- | --- | --------------------- | ----------------------------------------- | ------------------------------------ |
 | ,1         | 🟣  | Reload init.lua       | :source ~/.config/nvim/init.lua ⏎         |                                      |
 | ,2         | 🟣  | Edit init.lua         | :edit ~/.config/nvim/lua/user/init.lua ⏎  |                                      |
-| ,3         | 🟣  | Term in dir of buf    | `require("lazyvim.util").float_term(nil,{cwd=vim.fn.expand("%:p:h")})` |
+| ,3         | 🟣  | Term in dir of buf    | `require("lazyvim.util").terminal.open(nil,{cwd=vim.fn.expand("%:p:h")})` |
 | ,A         | 🟣  | Alpha Dashboard       | :Alpha  ⏎ 
 | ,C         | 🟣  | Color Schemes         | `TS().colorscheme({enable_preview=true})` |
 | ,E         | 🟣  | Vim Eval Into         | :EvalInto ⏎                               |
@@ -194,15 +197,6 @@ FUNCS = [
    'function SS() return require("smart-splits") end',
    'function TS() return require("telescope.builtin") end',
    'function UU() return require("user.utils") end',
-   '''function FmtAndSave()
-       local buf = vim.api.nvim_get_current_buf()
-       local ft = vim.bo[buf].filetype
-       if  #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0 then
-           vim.lsp.buf.format {async=true}
-       end
-       vim.cmd('update')
-   end
-   '''
 ]
 
 import time, os
