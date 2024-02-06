@@ -63,11 +63,13 @@ Type z and let which key help you, regarding other options
 
 | Mapping   | M   | What                        | How                                             | Cmt                                                                          |
 | --------- | --- | --------------------------- | --------------------------------                | ---------------------------------------------------------------------------- |
+| ,h        | 🟣  | Set html syntax             | :set syntax=html ⏎                              | E.g. in template strings, python, markdown...
 | ,d        | 🟣  | Done - write quit           | :wq! ⏎                                          |
-| ,s        | 🟣  | Toggle Autosave all buffers | :ASToggle ⏎ | See [here][autosave]  (Poccos' version is not respecting disable opt)        |
+| ,A         | 🟣  | Write all buffers          | :wa! ⏎ 
+| ,S        | 🟣  | Toggle Autosave all buffers | `ASGlobToggle()` | See [here][autosave]  (Poccos' version is not respecting disable opt)        |
 | ,w        | 🟣  | Format                      | :w!  ⏎                    
 | <C-d>     | 🟤  | Rm next bracket             | <Esc>lxA                                        | The autobrackets often make superfluos 2 brackets
-| <r-j>     | 🟤  | Jump over closing           | <C-O>a                                          | Jump over next char (closing bracket in insert mode)
+| <C-l>     | 🟤  | Jump over closing           | <C-O>a                                          | Jump over next char (closing bracket in insert mode)
 | <C-s>     | 🟣  | Save File                   | w!                                              |
 | <Down>    | 🟣  | Resize split down           | `SS().resize_down(2)`                           |
 | <Left>    | 🟣  | Resize split left           | `SS().resize_left(2)`                           |
@@ -125,7 +127,6 @@ Type z and let which key help you, regarding other options
 | ,1         | 🟣  | Reload init.lua       | :source ~/.config/nvim/init.lua ⏎         |                                      |
 | ,2         | 🟣  | Edit init.lua         | :edit ~/.config/nvim/lua/user/init.lua ⏎  |                                      |
 | ,3         | 🟣  | Term in dir of buf    | `require("lazyvim.util").terminal.open(nil,{cwd=vim.fn.expand("%:p:h")})` |
-| ,A         | 🟣  | Alpha Dashboard       | :Alpha  ⏎ 
 | ,C         | 🟣  | Color Schemes         | `TS().colorscheme({enable_preview=true})` |
 | ,E         | 🟣  | Vim Eval Into         | :EvalInto ⏎                               |
 | ,E         | 🟢  | Vim Eval Into         | :EvalInto ⏎                               |

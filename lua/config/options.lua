@@ -7,3 +7,6 @@ vim.g.python3_host_prog = "~/micromamba/envs/nvim/bin/python"
 vim.opt.background = "dark"
 vim.g.gruvbox_material_better_performance = 1
 -- vim.g.gruvbox_material_background = "hard"
+--
+--
+vim.filetype.add({ extension = { astro = 'html' } })

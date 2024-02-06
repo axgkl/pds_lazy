@@ -1,8 +1,11 @@
-" syntax match pythonOperator "=" conceal cchar=≢
-"
-" hi link pythonOperator Operator
-" hi! link Conceal Operator
-"
+" " syntax match pythonOperator "=" conceal cchar=≢
+" "
+" " hi link pythonOperator Operator
+" " hi! link Conceal Operator
+" "
+" let g:polyglot_disabled = ['autoindent']
+" let g:python_html_injection = 1
+
 " setlocal conceallevel=1
 setlocal textwidth=200
 " setlocal foldmethod=indent

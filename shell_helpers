@@ -1,18 +1,35 @@
 # vim:ft=sh
 # sourced in .bashrc or .zshrc
 function h { history | grep --color=auto -i "$1"; }
+
 function cd {
-    builtin cd "$@" || return
-    test -f 'environ' && source ./environ
+	builtin cd "$@" || return
+	test -f 'environ' || return
+	_try_source_environ_file
+}
+function _try_source_environ_file {
+	# security. don't autosource third party code
+	test -z "$PS1" && return
+	local okfiles h confirm
+	okfiles="$HOME/.config/autosourced_on_cd"
+	test -e "$okfiles" || touch "$okfiles" || return 1
+	h="$(pwd -P)"
+	grep "^$h$" <"$okfiles" && {
+		. ./environ
+		return $?
+	}
+	echo "Add $h to $okfiles? [y/N]"
+	read -r confirm
+	test "$confirm" = y && echo "$h" >>"$okfiles" && . ./environ
 }
 function gomod {
-    local mod="${1:-os}"
-    local l="$(python -c "import os, $mod;print(os.path.dirname($mod.__file__))")"
-    cd "$l"
-    pwd
+	local mod="${1:-os}"
+	local l="$(python -c "import os, $mod;print(os.path.dirname($mod.__file__))")"
+	cd "$l"
+	pwd
 }
 
-alias ack="rg --glob='!spell' --no-ignore --glob '!*/arch/*'" # not respect gitignore
+alias ack="rg --glob='!spell' --no-ignore --glob '!*arch/*' --glob '!*build/*' --glob '!*node_modules/*' --glob '!*dist/*'" # not respect gitignore
 alias ff='fd --no-ignore --hidden'
 alias fff='fd --no-ignore --hidden --follow'
 alias gc='git commit'
