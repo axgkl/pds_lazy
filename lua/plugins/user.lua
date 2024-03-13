@@ -10,7 +10,7 @@ return {
       require('autosave').setup({}) -- attach to all filetypes
     end,
   },
-
+  { 'echasnovski/mini.pairs', enabled = false },
   'axiros/vpe',
   'godlygeek/tabular',
   'junegunn/limelight.vim',
