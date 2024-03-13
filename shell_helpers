@@ -22,6 +22,7 @@ function _try_source_environ_file {
 	read -r confirm
 	test "$confirm" = y && echo "$h" >>"$okfiles" && . ./environ
 }
+
 function gomod {
 	local mod="${1:-os}"
 	local l="$(python -c "import os, $mod;print(os.path.dirname($mod.__file__))")"
