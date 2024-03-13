@@ -8,7 +8,12 @@ return {
   "cocopon/iceberg.vim",
   "cormacrelf/vim-colors-github",
   "ellisonleao/gruvbox.nvim",
-  "folke/tokyonight.nvim",
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = { style = 'night', transparent = false }
+  },
   "ramojus/mellifluous.nvim",
   "yazeed1s/oh-lucy.nvim",
   "dracula/vim",
@@ -29,7 +34,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa",
+      colorscheme = "tokyonight",
     },
   },
 }
