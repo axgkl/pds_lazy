@@ -19,40 +19,40 @@ brackets, e.g. `<Enter>` (we don't clutter the tables with backticks).
   <!--toc:end-->
 
 👉 All default Shortcuts: https://www.lazyvim.org/configuration/keymaps
-👉 `:map` lists them all  
+👉 `:map` lists them all
 
 ## Folding
 
-| Mapping   | M   | What            | How | Cmt                       |
-| -------   | --- | --------------- | --- | ------------------------- |
-| <C-i>     | 🟣  | Fold open       | zR  | " folds                   |
-| <Enter>   | 🟣  | Toggle fold     | za  | bufferlocal
-| <S-Tab>   | 🟣  | Close ALL Folds | zM  | <C-i> is ident with <TAB> |
+| Mapping | M   | What            | How | Cmt                       |
+| ------- | --- | --------------- | --- | ------------------------- |
+| <C-i>   | 🟣  | Fold open       | zR  | " folds                   |
+| <Enter> | 🟣  | Toggle fold     | za  | bufferlocal               |
+| <S-Tab> | 🟣  | Close ALL Folds | zM  | <C-i> is ident with <TAB> |
 
 Type z and let which key help you, regarding other options
 
 ## Navigation
 
-| Mapping         | M   | What                          | How                                                             | Cmt                                                                              |
-| --------------- | --- | ----------------------------- | ------------------------------------------                      | -------------------------------------------------------------------------------- |
-| ,c              | 🟣  | Close :bd                     | :bd ⏎                                                           | Close just a split or a tab                                                      |
-| ,g              | 🟣  | [Open file or URL][vpe_goto]  | :silent call PyEvalSelection('SmartGoto', '') ⏎                 | https://github.com/axiros/vpe                                                    |
-| ,g              | 🟢  | [Open file or URL][vpe_goto]  | :<C-U> silent call PyEvalSelection('SmartGoto', visualmode()) ⏎ |
-| ,q              | 🟣  | Quit all!                     | :quitall! ⏎                                                     |
-| ,u              | 🟣  | Undo Tree                     | :UndotreeToggle ⏎                                               |                                                                                  |
-| -SEMICOL-       | 🟣  | Buffers open                  | `TS().buffers()`                                                | 🟥 does not repeat last f t F T                                                  |
-| <M-o>           | 🟣  | Jump newer (after C-o)        | <C-i>                                                           | C-o jump older -> alt-o is jump newer (since C-i is tab which we need elsewhere) |
-| <M-w>           | 🟣  | Buffer delete :bd!            | :bd! ⏎                                                          | Close window                                                                     |
-| <leader>fg      | 🟣  | Git files                     | `TS().git_files()`                                              |
-| <leader><enter> | 🟣  | Previous edited buffer        | :b#<CR><Space>                                                  | in your open buffers (toggle back and forth) :b# ⏎ " previous buffer             |
-| G               | 🟣  | End of file                   | :$<CR><bar>:silent! ?begin-UNDER-archive ⏎                      | Move stuff you want to keep below a `begin_ archive` comment and G jumps to that |
-| ff              | 🟣  | Open file(from vi start dir)  | `TS().find_files()`                                             | You can open many files at once, by selecting them with TAB in the picker        |
-| gw              | 🟣  | Live grep words               | `TS().live_grep()`                                              | 🟥 gw reformat via gq                                                            |
-| <leader>ql      | 🟣  | Session load last             | :SessionManager! load_last_session ⏎                            |
-| <leader>qs      | 🟣  | Session save current          | :SessionManager! save_current_session ⏎                         |
-| <leader>qd      | 🟣  | Session delete                | :SessionManager! delete_session ⏎                               |
-| <leader>qf      | 🟣  | Session load                  | :SessionManager! load_session ⏎                                 |
-| <leader>q.      | 🟣  | Session load session or dir   | :SessionManager! load_current_dir_session ⏎                     |
+| Mapping         | M   | What                         | How                                                             | Cmt                                                                              |
+| --------------- | --- | ---------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| ,c              | 🟣  | Close :bd                    | :bd ⏎                                                           | Close just a split or a tab                                                      |
+| ,g              | 🟣  | [Open file or URL][vpe_goto] | :silent call PyEvalSelection('SmartGoto', '') ⏎                 | https://github.com/axiros/vpe                                                    |
+| ,g              | 🟢  | [Open file or URL][vpe_goto] | :<C-U> silent call PyEvalSelection('SmartGoto', visualmode()) ⏎ |
+| ,q              | 🟣  | Quit all!                    | :quitall! ⏎                                                     |
+| ,u              | 🟣  | Undo Tree                    | :UndotreeToggle ⏎                                               |                                                                                  |
+| -SEMICOL-       | 🟣  | Buffers open                 | `TS().buffers()`                                                | 🟥 does not repeat last f t F T                                                  |
+| <M-o>           | 🟣  | Jump newer (after C-o)       | <C-i>                                                           | C-o jump older -> alt-o is jump newer (since C-i is tab which we need elsewhere) |
+| <M-w>           | 🟣  | Buffer delete :bd!           | :bd! ⏎                                                          | Close window                                                                     |
+| <leader>fg      | 🟣  | Git files                    | `TS().git_files()`                                              |
+| <leader><enter> | 🟣  | Previous edited buffer       | :b#<CR><Space>                                                  | in your open buffers (toggle back and forth) :b# ⏎ " previous buffer             |
+| G               | 🟣  | End of file                  | :$<CR><bar>:silent! ?begin-UNDER-archive ⏎                      | Move stuff you want to keep below a `begin_ archive` comment and G jumps to that |
+| ff              | 🟣  | Open file(from vi start dir) | `TS().find_files()`                                             | You can open many files at once, by selecting them with TAB in the picker        |
+| gw              | 🟣  | Live grep words              | `TS().live_grep()`                                              | 🟥 gw reformat via gq                                                            |
+| <leader>ql      | 🟣  | Session load last            | :SessionManager! load_last_session ⏎                            |
+| <leader>qs      | 🟣  | Session save current         | :SessionManager! save_current_session ⏎                         |
+| <leader>qd      | 🟣  | Session delete               | :SessionManager! delete_session ⏎                               |
+| <leader>qf      | 🟣  | Session load                 | :SessionManager! load_session ⏎                                 |
+| <leader>q.      | 🟣  | Session load session or dir  | :SessionManager! load_current_dir_session ⏎                     |
 
 🟥 Arrow keys resize split windows, i.e. **won't** work for navigation (hjkl ftw)
 
@@ -61,28 +61,28 @@ Type z and let which key help you, regarding other options
 
 ## Editing
 
-| Mapping   | M   | What                        | How                                             | Cmt                                                                          |
-| --------- | --- | --------------------------- | --------------------------------                | ---------------------------------------------------------------------------- |
-| ,h        | 🟣  | Set html syntax             | :set syntax=html ⏎                              | E.g. in template strings, python, markdown...
-| ,d        | 🟣  | Done - write quit           | :wq! ⏎                                          |
-| ,A         | 🟣  | Write all buffers          | :wa! ⏎ 
-| ,S        | 🟣  | Toggle Autosave all buffers | `ASGlobToggle()` | See [here][autosave]  (Poccos' version is not respecting disable opt)        |
-| ,w        | 🟣  | Format                      | :w!  ⏎                    
-| <C-d>     | 🟤  | Rm next bracket             | <Esc>lxA                                        | The autobrackets often make superfluos 2 brackets
-| <C-l>     | 🟤  | Jump over closing           | <C-O>a                                          | Jump over next char (closing bracket in insert mode)
-| <C-s>     | 🟣  | Save File                   | w!                                              |
-| <Down>    | 🟣  | Resize split down           | `SS().resize_down(2)`                           |
-| <Left>    | 🟣  | Resize split left           | `SS().resize_left(2)`                           |
-| <Right>   | 🟣  | Resize split right          | `SS().resize_right(2)`                          |
-| <Up>      | 🟣  | Resize split up             | `SS().resize_up(2)`                             |
-| <leader>d | 🟣  | Delete noregister           | `'"_d`                                          | In visual or normal mode, delete w/o overwriting your "pasteable content"    |
-| <leader>d | 🟠  | Delete noregister           | `'"_d`                                          |
-| <M-s>     | 🟣  | Easy global replace         | :%s//gI<Left><Left><Left>                       |
-| Y         | 🟣  | Yank (like C and D)         | y$                                              |
-| fj        | 🟣  | Line join                   | $mx<cmd>join ⏎0$[-BACKTICK-dmx h                | Line join better, position cursor at join point : " (J is para down)         |
-| ga        | 🟣  |                             | :Tabularize/                                    |
-| ga        | 🟢  |                             | :Tabularize/                                    |
-| gq        | 🟣  | Format w/o formatexpr       | gwgw                                            | null-ls messes formatexpr for some reason, which [affects `gq`][gqbugorfeat] |
+| Mapping   | M   | What                        | How                              | Cmt                                                                          |
+| --------- | --- | --------------------------- | -------------------------------- | ---------------------------------------------------------------------------- |
+| ,h        | 🟣  | Set html syntax             | :set syntax=html ⏎               | E.g. in template strings, python, markdown...                                |
+| ,d        | 🟣  | Done - write quit           | :wq! ⏎                           |
+| ,A        | 🟣  | Write all buffers           | :wa! ⏎                           |
+| ,S        | 🟣  | Toggle Autosave all buffers | `ASGlobToggle()`                 | See [here][autosave] (Poccos' version is not respecting disable opt)         |
+| ,w        | 🟣  | Format                      | :w! ⏎                            |
+| <C-d>     | 🟤  | Rm next bracket             | <Esc>lxA                         | The autobrackets often make superfluos 2 brackets                            |
+| <C-l>     | 🟤  | Jump over closing           | <C-O>a                           | Jump over next char (closing bracket in insert mode)                         |
+| <C-s>     | 🟣  | Save File                   | w!                               |
+| <Down>    | 🟣  | Resize split down           | `SS().resize_down(2)`            |
+| <Left>    | 🟣  | Resize split left           | `SS().resize_left(2)`            |
+| <Right>   | 🟣  | Resize split right          | `SS().resize_right(2)`           |
+| <Up>      | 🟣  | Resize split up             | `SS().resize_up(2)`              |
+| <leader>d | 🟣  | Delete noregister           | `'"_d`                           | In visual or normal mode, delete w/o overwriting your "pasteable content"    |
+| <leader>d | 🟠  | Delete noregister           | `'"_d`                           |
+| <M-s>     | 🟣  | Easy global replace         | :%s//gI<Left><Left><Left>        |
+| Y         | 🟣  | Yank (like C and D)         | y$                               |
+| fj        | 🟣  | Line join                   | $mx<cmd>join ⏎0$[-BACKTICK-dmx h | Line join better, position cursor at join point : " (J is para down)         |
+| ga        | 🟣  |                             | :Tabularize/                     |
+| ga        | 🟢  |                             | :Tabularize/                     |
+| gq        | 🟣  | Format w/o formatexpr       | gwgw                             | null-ls messes formatexpr for some reason, which [affects `gq`][gqbugorfeat] |
 
 - `0` Start of line
 - `jk` Same as `<ESC>` in insert mode
@@ -104,44 +104,40 @@ Type z and let which key help you, regarding other options
 | J       | 🟣  | Jump paragraph down         | }j              | 🟥 J won't line-join. fj for that   |
 | K       | 🟣  | Jump paragraph up           | {k{kk}j         |
 
-
 ## LSP / Coding
 
-| Mapping    | M   | What               | How                           | Cmt                     |
-| -------    | --- | ------------------ | ----------------------------- | ---                     |
-| ,D         | 🟣  | Buffer Diagnostics | `TS().diagnostics({bufnr=0})` |
-| <leader>cR | 🟣  | Find References    | `vim.lsp.buf.references()`    | gr as well but in hover
-| <M-Down>   | 🟣  | Next Trouble Loc   | `require("trouble").next({skip_groups = true, jump = true});`    | gr as well but in hover
-| <M-Up>     | 🟣  | Prev Trouble Loc   | `require("trouble").next({skip_groups = true, jump = true});`    | gr as well but in hover
+| Mapping    | M   | What               | How                                                           | Cmt                     |
+| ---------- | --- | ------------------ | ------------------------------------------------------------- | ----------------------- |
+| ,D         | 🟣  | Buffer Diagnostics | `TS().diagnostics({bufnr=0})`                                 |
+| <leader>cR | 🟣  | Find References    | `vim.lsp.buf.references()`                                    | gr as well but in hover |
+| <M-Down>   | 🟣  | Next Trouble Loc   | `require("trouble").next({skip_groups = true, jump = true});` | gr as well but in hover |
+| <M-Up>     | 🟣  | Prev Trouble Loc   | `require("trouble").next({skip_groups = true, jump = true});` | gr as well but in hover |
 
 - `gd` Goto definition (e.g. over function name)
 - `<leader>cr` Rename e.g. function name
-- `<leader>k` [Hover (code context help)](./lsp/keymaps.lua) 
+- `<leader>k` [Hover (code context help)](./lsp/keymaps.lua)
 
 👉 `:LSPInstall`
 
 ## Misc
 
-| Mapping    | M   | What                  | How                                       | Cmt                                  |
-| ---------- | --- | --------------------- | ----------------------------------------- | ------------------------------------ |
-| ,1         | 🟣  | Reload init.lua       | :source ~/.config/nvim/init.lua ⏎         |                                      |
-| ,2         | 🟣  | Edit init.lua         | :edit ~/.config/nvim/lua/user/init.lua ⏎  |                                      |
-| ,3         | 🟣  | Term in dir of buf    | `require("lazyvim.util").terminal.open(nil,{cwd=vim.fn.expand("%:p:h")})` |
-| ,C         | 🟣  | Color Schemes         | `TS().colorscheme({enable_preview=true})` |
-| ,E         | 🟣  | Vim Eval Into         | :EvalInto ⏎                               |
-| ,E         | 🟢  | Vim Eval Into         | :EvalInto ⏎                               |
-| ,G         | 🟣  | Lazygit               | :TermExec cmd=lazygit ⏎                   |
-| ,W         | 🟣  | Save all buffers      | :wa ⏎                                     |
-| ,r         | 🟣  | [VimPythonEval][vpe]  | :call PyEvalSelection('Eval', '') ⏎       | https://github.com/axiros/vpe        |
-| ,r         | 🟢  | VimPythonEval         | :<C-U> call PyEvalSelection('Eval', visualmode()) ⏎  |
-| <C-E>      | 🟤  |                       | <C-O>A                                    | " Jump to end of line in insert mode |
-| <C-L>      | 🟣  |                       | <C-W><C-J>                                |
-| <M-H>      | 🟣  | pds help              | :edit ~/.config/nvim/lua/user/README.md ⏎ |
-| gq         | 🟠  | Format w/o formatexpr | gwgw                                      |
-| ⏎          | 🟠  | Fold all open         | zO                                        |
-
-
-
+| Mapping | M   | What                  | How                                                                       | Cmt                                  |
+| ------- | --- | --------------------- | ------------------------------------------------------------------------- | ------------------------------------ |
+| ,1      | 🟣  | Reload init.lua       | :source ~/.config/nvim/init.lua ⏎                                         |                                      |
+| ,2      | 🟣  | Edit init.lua         | :edit ~/.config/nvim/lua/user/init.lua ⏎                                  |                                      |
+| ,3      | 🟣  | Term in dir of buf    | `require("lazyvim.util").terminal.open(nil,{cwd=vim.fn.expand("%:p:h")})` |
+| ,C      | 🟣  | Color Schemes         | `TS().colorscheme({enable_preview=true})`                                 |
+| ,E      | 🟣  | Vim Eval Into         | :EvalInto ⏎                                                               |
+| ,E      | 🟢  | Vim Eval Into         | :EvalInto ⏎                                                               |
+| ,G      | 🟣  | Lazygit               | :TermExec cmd=lazygit ⏎                                                   |
+| ,W      | 🟣  | Save all buffers      | :wa ⏎                                                                     |
+| ,r      | 🟣  | [VimPythonEval][vpe]  | :call PyEvalSelection('Eval', '') ⏎                                       | https://github.com/axiros/vpe        |
+| ,r      | 🟢  | VimPythonEval         | :<C-U> call PyEvalSelection('Eval', visualmode()) ⏎                       |
+| <C-E>   | 🟤  |                       | <C-O>A                                                                    | " Jump to end of line in insert mode |
+| <C-L>   | 🟣  |                       | <C-W><C-J>                                                                |
+| <M-H>   | 🟣  | pds help              | :edit ~/.config/nvim/lua/user/README.md ⏎                                 |
+| gq      | 🟠  | Format w/o formatexpr | gwgw                                                                      |
+| ⏎       | 🟠  | Fold all open         | zO                                                                        |
 
 ## Usage
 

@@ -1,11 +1,11 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 --
 
+--vim.g.maplocalleader = ','
 require('config.lazy')
 
 --.setup("plugins", {
 
-vim.g.maplocalleader = ','
 P = function(v)
   print(vim.inspect(v))
   return v

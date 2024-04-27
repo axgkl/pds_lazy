@@ -1,16 +1,8 @@
--- pyright config via pyproject.toml: https://github.com/microsoft/pyright/blob/main/docs/configuration.md
-
 return {
   'mrjones2014/smart-splits.nvim', -- better than lazies resize (left is really left in right split)
-  --{ 'Pocco81/auto-save.nvim', cmd = 'ASToggle' },
-  {
-    'nullishamy/autosave.nvim',     -- cmd = 'ASGlobalToggle' },
-    lazy = true,                    -- means: off at start, since noone except toggle requires it. at first toogle it'll be disabled though. can live with that.
-    config = function()
-      require('autosave').setup({}) -- attach to all filetypes
-    end,
-  },
+
   { 'echasnovski/mini.pairs', enabled = false },
+
   'axiros/vpe',
   'godlygeek/tabular',
   'junegunn/limelight.vim',
@@ -18,36 +10,7 @@ return {
   'tpope/vim-surround',
   'brentyi/isort.vim',
   'isobit/vim-caddyfile',
-  --'sheerun/vim-polyglot',
-  --'uga-rosa/translate.nvim',
-  --'github/copilot.vim',
-
-  -- {
-  --   "folke/flash.nvim",
-  --   enabled = false,
-  -- },
-  -- {
-  --   "folke/noice.nvim",
-  --   enabled = false,
-  --   opts = {
-  --     presets = { bottom_search = false },
-  --     routes = {
-  --       {
-  --         filter = {
-  --           event = "msg_show",
-  --           any = {
-  --             { find = "%d+L, %d+B" },
-  --             { find = "; after #%d+" },
-  --             { find = "; before #%d+" },
-  --             { find = "%d fewer lines" },
-  --             { find = "%d more lines" },
-  --           },
-  --         },
-  --         opts = { skip = true },
-  --       },
-  --     },
-  --   },
-  -- },
+  'nvim-zh/better-escape.vim',
   {
     'norcalli/nvim-colorizer.lua',
     config = function()
@@ -64,80 +27,40 @@ return {
     end,
   },
   {
-    'mfussenegger/nvim-dap',
-    opts = function(_, opts)
-      require('config.dap')
-    end,
-  },
-  {
     'williamboman/mason.nvim',
     opts = {
       ensure_installed = {
         --'js-debug-adapter',
         'shfmt',
-        'node-debug2-adapter',
-        'typescript-language-server',
       },
     },
   },
-
-  -- Use <tab> for completion and snippets (supertab)
-
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   ft = "python",
-  --   opts = {
-  --     servers = {
-  --       pyright = {
-  --         -- https://fossies.org/linux/pyright/docs/settings.md
-  --         settings = {
-  --           pyright = {
-  --             disableLanguageServices = false,
-  --             disableOrganizeImports = true,
-  --             reportMissingModuleSource = "none",
-  --             reportMissingImports = "none",
-  --             reportUndefinedVariable = "none",
-  --           },
-  --           python = {
-  --             analysis = {
-  --               autoSearchPaths = true,
-  --               diagnosticMode = "workspace",
-  --               typeCheckingMode = "basic",
-  --               useLibraryCodeForTypes = true,
-  --             },
-  --           },
-  --         },
-  --       },
-  --       ruff_lsp = {
-  --         on_attach = function(client, _)
-  --           client.server_capabilities.hoverProvider = false
-  --         end,
-  --         init_options = {
-  --           settings = {
-  --             args = {},
-  --           },
-  --         },
-  --       },
-  --     },
-  --   },
-  -- },
-  -- kshenoy/vim-signature
-  --  {
-  --    "simrat39/symbols-outline.nvim", -- the symbols split window
-  --    cmd = "SymbolsOutline",
-  --    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
-  --    config = true,
-  --  },
-
-  -- add telescope-fzf-native: Faster + supports e.g. 'foo
-  --   {
-  --     "telescope.nvim",
-  --     dependencies = {
-  --       "nvim-telescope/telescope-fzf-native.nvim",
-  --       build = "make",
-  --       config = function()
-  --         require("telescope").load_extension("fzf")
-  --       end,
-  --     },
-  --   },
+  -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
+  -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
+  -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
+  -- would overwrite `ensure_installed` with the new value.
+  -- If you'd rather extend the default config, use the code below instead:
+  {
+    'nvim-treesitter/nvim-treesitter',
+    opts = function(_, opts)
+      -- add tsx and treesitter
+      vim.list_extend(opts.ensure_installed, {
+        'bash',
+        'html',
+        'javascript',
+        'json',
+        'lua',
+        'markdown',
+        'markdown_inline',
+        'mermaid',
+        'python',
+        'query',
+        'regex',
+        --"tsx",
+        --"typescript",
+        'vim',
+        'yaml',
+      })
+    end,
+  },
 }
