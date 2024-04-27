@@ -30,7 +30,12 @@ function gomod {
 	pwd
 }
 
-alias ack="rg --glob='!spell' --no-ignore --glob '!*arch/*' --glob '!*build/*' --glob '!*node_modules/*' --glob '!*dist/*'" # not respect gitignore
+function ack {
+	echo 'NOT respect gitignore' >&2
+	set -x
+	rg --glob '!*.min.js' --glob '!*.min.css' --glob='!spell' --no-ignore --glob '!*arch/*' --glob '!*build/*' --glob '!*node_modules/*' --glob '!*dist/*' "$@"
+	set +x
+}
 alias ff='fd --no-ignore --hidden'
 alias fff='fd --no-ignore --hidden --follow'
 alias gc='git commit'

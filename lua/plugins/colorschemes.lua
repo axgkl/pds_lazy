@@ -9,10 +9,16 @@ return {
   "cormacrelf/vim-colors-github",
   "ellisonleao/gruvbox.nvim",
   {
-    "folke/tokyonight.nvim",
+    'barrientosvctor/abyss.nvim',
     lazy = false,
     priority = 1000,
-    opts = { style = 'night', transparent = false }
+    opts = {}
+  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = true,
+    priority = 1000,
+    opts = { style = 'day', transparent = false }
   },
   "ramojus/mellifluous.nvim",
   "yazeed1s/oh-lucy.nvim",
@@ -31,10 +37,11 @@ return {
     },
   },
   -- Configure LazyVim to load gruvbox
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "tokyonight",
-    },
-  },
+  -- {
+  --   "LazyVim/LazyVim",
+  --   opts = {
+  --     colorscheme = "tokyonight-day",
+  --     -- colorscheme = "abyss",
+  --   },
+  -- },
 }
