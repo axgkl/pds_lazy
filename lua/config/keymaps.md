@@ -40,12 +40,12 @@ Type z and let which key help you, regarding other options
 | ,g              | 🟢  | [Open file or URL][vpe_goto] | :<C-U> silent call PyEvalSelection('SmartGoto', visualmode()) ⏎ |
 | ,q              | 🟣  | Quit all!                    | :quitall! ⏎                                                     |
 | ,u              | 🟣  | Undo Tree                    | :UndotreeToggle ⏎                                               |                                                                                  |
-| -SEMICOL-       | 🟣  | Buffers open                 | `TS().buffers()`                                                | 🟥 does not repeat last f t F T                                                  |
+| -SEMICOL-       | 🟣  | Buffers open                 | `BufsWithRecent()`                                              | 🟥 does not repeat last f t F T                                                  |
 | <M-o>           | 🟣  | Jump newer (after C-o)       | <C-i>                                                           | C-o jump older -> alt-o is jump newer (since C-i is tab which we need elsewhere) |
 | <M-w>           | 🟣  | Buffer delete :bd!           | :bd! ⏎                                                          | Close window                                                                     |
 | <leader>fg      | 🟣  | Git files                    | `TS().git_files()`                                              |
 | <leader><enter> | 🟣  | Previous edited buffer       | :b#<CR><Space>                                                  | in your open buffers (toggle back and forth) :b# ⏎ " previous buffer             |
-| G               | 🟣  | End of file                  | :$<CR><bar>:silent! ?begin-UNDER-archive ⏎                      | Move stuff you want to keep below a `begin_ archive` comment and G jumps to that |
+| G               | 🟣  | End of file                  | :$<CR><bar>:silent! ?begin-UNDER-archive ⏎zb                    | Move stuff you want to keep below a `begin_ archive` comment and G jumps to that |
 | ff              | 🟣  | Open file(from vi start dir) | `TS().find_files()`                                             | You can open many files at once, by selecting them with TAB in the picker        |
 | gw              | 🟣  | Live grep words              | `TS().live_grep()`                                              | 🟥 gw reformat via gq                                                            |
 | <leader>ql      | 🟣  | Session load last            | :SessionManager! load_last_session ⏎                            |
@@ -106,12 +106,13 @@ Type z and let which key help you, regarding other options
 
 ## LSP / Coding
 
-| Mapping    | M   | What               | How                                                           | Cmt                     |
-| ---------- | --- | ------------------ | ------------------------------------------------------------- | ----------------------- |
+| Mapping    | M   | What               | How                                                           | Cmt                          |
+| ---------- | --- | ------------------ | ------------------------------------------------------------- | ---------------------------- |
 | ,D         | 🟣  | Buffer Diagnostics | `TS().diagnostics({bufnr=0})`                                 |
-| <leader>cR | 🟣  | Find References    | `vim.lsp.buf.references()`                                    | gr as well but in hover |
-| <M-Down>   | 🟣  | Next Trouble Loc   | `require("trouble").next({skip_groups = true, jump = true});` | gr as well but in hover |
-| <M-Up>     | 🟣  | Prev Trouble Loc   | `require("trouble").next({skip_groups = true, jump = true});` | gr as well but in hover |
+| <leader>cR | 🟣  | Find References    | `vim.lsp.buf.references()`                                    | gr as well but in hover      |
+| <leader>cs | 🟣  | Show Symbols Outl  | :Vista!!<CR>                                                  | Only configured for nvim_lsp |
+| <M-Down>   | 🟣  | Next Trouble Loc   | `require("trouble").next({skip_groups = true, jump = true});` | gr as well but in hover      |
+| <M-Up>     | 🟣  | Prev Trouble Loc   | `require("trouble").next({skip_groups = true, jump = true});` | gr as well but in hover      |
 
 - `gd` Goto definition (e.g. over function name)
 - `<leader>cr` Rename e.g. function name
@@ -194,7 +195,20 @@ FUNCS = [
    'function SS() return require("smart-splits") end',
    'function TS() return require("telescope.builtin") end',
    'function UU() return require("user.utils") end',
-]
+  '''
+  function BufsWithRecent()
+    require('telescope.builtin').buffers({
+      prompt_title = 'Open Buffers. Hit ",r" for RECENT files',
+      attach_mappings = function(_, map)
+        map('i', ',r', function()
+          TS().oldfiles()
+        end)
+        return true
+      end,
+    })
+  end
+ '''
+  ]
 
 import time, os
 

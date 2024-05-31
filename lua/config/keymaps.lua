@@ -9,6 +9,19 @@ end
 function UU()
 	return require("user.utils")
 end
+
+function BufsWithRecent()
+	require("telescope.builtin").buffers({
+		prompt_title = 'Open Buffers. Hit ",r" for RECENT files',
+		attach_mappings = function(_, map)
+			map("i", ",r", function()
+				TS().oldfiles()
+			end)
+			return true
+		end,
+	})
+end
+
 local maps = {
 	n = {
 		-- " folds
@@ -26,7 +39,7 @@ local maps = {
 		-- 🟥 does not repeat last f t F T
 		[";"] = {
 			function()
-				TS().buffers()
+				BufsWithRecent()
 			end,
 			desc = "Buffers open",
 		},
@@ -43,7 +56,7 @@ local maps = {
 		-- in your open buffers (toggle back and forth) :b# ⏎ " previous buffer
 		["<leader><enter>"] = { ":b#<CR><Space>", desc = "Previous edited buffer" },
 		-- Move stuff you want to keep below a `begin_ archive` comment and G jumps to that
-		["G"] = { ":$<CR><bar>:silent! ?begin_archive<CR>", desc = "End of file" },
+		["G"] = { ":$<CR><bar>:silent! ?begin_archive<CR>zb", desc = "End of file" },
 		-- You can open many files at once, by selecting them with TAB in the picker
 		["ff"] = {
 			function()
@@ -129,6 +142,8 @@ local maps = {
 			end,
 			desc = "Find References",
 		},
+		-- Only configured for nvim_lsp
+		["<leader>cs"] = { ":Vista!!<CR>", desc = "Show Symbols Outl" },
 		-- gr as well but in hover
 		["<M-Down>"] = {
 			function()

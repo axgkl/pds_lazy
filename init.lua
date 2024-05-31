@@ -22,3 +22,12 @@ ASGlobToggle = function()
   end
   vim.notify(k .. '  Global(!) autosave is ' .. tostring(as.enabled))
 end
+
+local actions = require('telescope.actions')
+require('telescope').setup({
+  defaults = { mappings = { i = {
+    [',c'] = actions.close,
+    [',q'] = actions.close,
+  } } },
+})
+-- vim.lsp.set_log_level("debug")
