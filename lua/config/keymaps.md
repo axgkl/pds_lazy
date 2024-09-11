@@ -18,7 +18,7 @@ brackets, e.g. `<Enter>` (we don't clutter the tables with backticks).
   - [Helpers](#helpers) - [Arch](#arch) - [Links](#links) - [Parser](#parser) - [Code](#code)
   <!--toc:end-->
 
-👉 All default Shortcuts: https://www.lazyvim.org/configuration/keymaps
+👉 All default Shortcuts: <https://www.lazyvim.org/configuration/keymaps>
 👉 `:map` lists them all
 
 ## Folding
@@ -35,8 +35,9 @@ Type z and let which key help you, regarding other options
 
 | Mapping         | M   | What                         | How                                                             | Cmt                                                                              |
 | --------------- | --- | ---------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| ,               | 🟣  | Disable ,                    | <Nop>                                                           |                                                                                  |
 | ,c              | 🟣  | Close :bd                    | :bd ⏎                                                           | Close just a split or a tab                                                      |
-| ,g              | 🟣  | [Open file or URL][vpe_goto] | :silent call PyEvalSelection('SmartGoto', '') ⏎                 | https://github.com/axiros/vpe                                                    |
+| ,g              | 🟣  | [Open file or URL][vpe_goto] | :silent call PyEvalSelection('SmartGoto', '') ⏎                 | <https://github.com/axiros/vpe>                                                    |
 | ,g              | 🟢  | [Open file or URL][vpe_goto] | :<C-U> silent call PyEvalSelection('SmartGoto', visualmode()) ⏎ |
 | ,q              | 🟣  | Quit all!                    | :quitall! ⏎                                                     |
 | ,u              | 🟣  | Undo Tree                    | :UndotreeToggle ⏎                                               |                                                                                  |
@@ -83,6 +84,7 @@ Type z and let which key help you, regarding other options
 | ga        | 🟣  |                             | :Tabularize/                     |
 | ga        | 🟢  |                             | :Tabularize/                     |
 | gq        | 🟣  | Format w/o formatexpr       | gwgw                             | null-ls messes formatexpr for some reason, which [affects `gq`][gqbugorfeat] |
+| Z         | 🟣  | Vis block mode              | <Cmd>normal! <C-v><CR>           | ctrl-v taken by terms                                                        |
 
 - `0` Start of line
 - `jk` Same as `<ESC>` in insert mode
@@ -127,12 +129,13 @@ Type z and let which key help you, regarding other options
 | ,1      | 🟣  | Reload init.lua       | :source ~/.config/nvim/init.lua ⏎                                         |                                      |
 | ,2      | 🟣  | Edit init.lua         | :edit ~/.config/nvim/lua/user/init.lua ⏎                                  |                                      |
 | ,3      | 🟣  | Term in dir of buf    | `require("lazyvim.util").terminal.open(nil,{cwd=vim.fn.expand("%:p:h")})` |
-| ,C      | 🟣  | Color Schemes         | `TS().colorscheme({enable_preview=true})`                                 |
+| ,4      | 🟣  | Term in git root dir  | `require("lazyvim.util").terminal.open(nil)`                              |
+| ,C      | 🟣  | Copilot Chat          | :CopilotChatToggle ⏎                                                      |
 | ,E      | 🟣  | Vim Eval Into         | :EvalInto ⏎                                                               |
 | ,E      | 🟢  | Vim Eval Into         | :EvalInto ⏎                                                               |
 | ,G      | 🟣  | Lazygit               | :TermExec cmd=lazygit ⏎                                                   |
 | ,W      | 🟣  | Save all buffers      | :wa ⏎                                                                     |
-| ,r      | 🟣  | [VimPythonEval][vpe]  | :call PyEvalSelection('Eval', '') ⏎                                       | https://github.com/axiros/vpe        |
+| ,r      | 🟣  | [VimPythonEval][vpe]  | :call PyEvalSelection('Eval', '') ⏎                                       | <https://github.com/axiros/vpe>        |
 | ,r      | 🟢  | VimPythonEval         | :<C-U> call PyEvalSelection('Eval', visualmode()) ⏎                       |
 | <C-E>   | 🟤  |                       | <C-O>A                                                                    | " Jump to end of line in insert mode |
 | <C-L>   | 🟣  |                       | <C-W><C-J>                                                                |
@@ -176,10 +179,7 @@ Details: Any line in this file is [parsed](#code), which:
 [mapraw]: https://raw.githubusercontent.com/AXGKl/pds/master/setup/astro/mappings.md
 [vim-surround]: https://github.com/tpope/vim-surround
 [autosave]: https://github.com/nullishamy/autosave.nvim
-[whichkey]: https://github.com/folke/which-key.nvim
 [tabularize]: https://github.com/godlygeek/tabular
-[lp]: https://www.youtube.com/watch?v=HtPL2YhK6h0&t=165s
-[neotree]: https://github.com/nvim-neo-tree/neo-tree.nvim
 [gqbugorfeat]: https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
 [vpe]: https://github.com/axiros/vpe
 [vpe_goto]: https://github.com/axiros/vpe/blob/main/docs/smart_goto.md

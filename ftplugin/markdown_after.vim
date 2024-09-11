@@ -1,3 +1,5 @@
+colorscheme catppuccin
+
 " "syntax keyword Normal foo conceal cchar=🟧
 "
 " "TSDisable highlight

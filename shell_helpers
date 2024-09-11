@@ -1,6 +1,9 @@
 # vim:ft=sh
 # sourced in .bashrc or .zshrc
-function h { history | grep --color=auto -i "$1"; }
+function  h {
+	type atuin >/dev/null && { atuin search --cmd-only "$1" && return $?; }
+	history | grep --color=auto -i "$1"
+}
 
 function cd {
 	builtin cd "$@" || return
@@ -44,6 +47,31 @@ alias gd='git diff --color'
 alias gp='git pull'
 alias gP='git push'
 alias lg='lazygit'
-alias ll='exa -l -g --icons --sort newest --reverse --group-directories-first --color=always'
 alias mm='micromamba'
 alias scu='systemctl --user'
+unalias ll 2>/dev/null
+function ll {
+	"$HOME/micromamba/envs/tools/bin/eza" \
+		--color-scale-mode fixed \
+		--color=always \
+		--group-directories-first \
+		--icons \
+		--reverse \
+		--sort newest \
+		-g \
+		-l \
+		--time-style=relative --no-user --no-permissions \
+		"$@" |
+		sed -e 's/ minutes/m/g' |
+		sed -e 's/ minute\o033\[0m /m/g' |
+		sed -e 's/ hours\o033\[0m  /h/g' |
+		sed -e 's/ hour\o033\[0m   /h/g' |
+		sed -e 's/ days\o033\[0m   /d/g' |
+		sed -e 's/ day\o033\[0m    /d/g' |
+		sed -e 's/ weeks\o033\[0m  /w/g' |
+		sed -e 's/ week\o033\[0m   /w/g' |
+		sed -e 's/ months\o033\[0m /M/g' |
+		sed -e 's/ month\o033\[0m  /M/g' |
+		sed -e 's/ years\o033\[0m  /Y/g' |
+		sed -e 's/ year\o033\[0m   /Y/g'
+}

@@ -31,3 +31,20 @@ require('telescope').setup({
   } } },
 })
 -- vim.lsp.set_log_level("debug")
+vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = '#283D60', italic = true })
+vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = '#225588', italic = true })
+vim.api.nvim_set_hl(0, 'String', { fg = '#839496', italic = true })
+vim.api.nvim_set_hl(0, 'String', { fg = '#839496', italic = true })
+
+vim.api.nvim_set_keymap('n', 'Z', '<Cmd>normal! <C-v><CR>', { noremap = true, silent = true })
+
+-- vim.api.nvim_set_hl(0, 'Normal', { guibg = 'Red' })
+-- vim.api.nvim_command('highlight Normal guibg=red')
+
+--vim.api.nvim_set_hl(0, 'Function', { fg = '#93a1a1', italic = true })
+-- vim.api.nvim_set_hl(0, 'Function', { fg = '#6c71c4', italic = false, bold = true })
+-- vim.api.nvim_set_hl(0, 'NimTreeIndentMarkerxxx', { fg = '#6c71c4', italic = false, bold = true })
+-- vim.api.nvim_set_hl(0, 'NimTreeIndentMarker', { fg = '#6c71c4', italic = false, bold = true })
+-- --vim.api.nvim_set_hl(0, 'Class', { fg = '#93a1a1', italic = true })
+--
+-- vim.opt.termguicolors = false

@@ -1,22 +1,53 @@
 return {
-  'mrjones2014/smart-splits.nvim', -- better than lazies resize (left is really left in right split)
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      --"echasnovski/mini.icons",
+      'nvim-tree/nvim-web-devicons',
+    },
+    ft = 'markdown',
+    opts = { heading = {}, code = {} },
+  },
+  ----------------------------------- colorthemes
+  'rose-pine/neovim',
+  'sainnhe/sonokai',
+  'sainnhe/everforest',
+  'arcticicestudio/nord-vim',
+  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000, lazy = false },
+  'cocopon/iceberg.vim',
+  'cormacrelf/vim-colors-github',
+  'folke/tokyonight.nvim',
+  'ramojus/mellifluous.nvim',
+  'yazeed1s/oh-lucy.nvim',
+  'dracula/vim',
+  'joshdick/onedark.vim',
+  'matsuuu/pinkmare',
+  --'AlexvZyl/nordic.nvim',
+  'AXGKl/nordic.nvim',
+  'rebelot/kanagawa.nvim',
+  'alligator/accent.vim',
+  {
+    'barrientosvctor/abyss.nvim',
+    lazy = true,
+    priority = 1000,
+  },
+  { 'lmburns/kimbox', lazy = true, priority = 1000 },
+  ----------------------------------- end colorthemes
 
+  'mrjones2014/smart-splits.nvim', -- better than lazies resize (left is really left in right split)
+  'vim-crystal/vim-crystal', -- ruby but fast
   { 'echasnovski/mini.pairs', enabled = false },
 
   'axiros/vpe',
   'godlygeek/tabular',
-  'junegunn/limelight.vim',
+  --'junegunn/limelight.vim',
   'mbbill/undotree',
   'tpope/vim-surround',
   'brentyi/isort.vim',
   'isobit/vim-caddyfile',
   'nvim-zh/better-escape.vim',
-  {
-    'norcalli/nvim-colorizer.lua',
-    config = function()
-      require('colorizer').setup() -- attach to all filetypes
-    end,
-  },
+  --'liuchengxu/vista.vim',
   {
 
     'hrsh7th/nvim-cmp',
@@ -27,11 +58,14 @@ return {
     end,
   },
   {
-    'williamboman/mason.nvim',
-    opts = {
-      ensure_installed = {
-        --'js-debug-adapter',
-        'shfmt',
+    'nvim-telescope/telescope.nvim',
+    keys = {
+      -- add a keymap to browse plugin files
+      -- stylua: ignore
+      {
+        "<leader>T",
+        function() require("telescope.builtin").builtin() end,
+        desc = "List all Telescope Builtins",
       },
     },
   },
@@ -62,5 +96,39 @@ return {
         'yaml',
       })
     end,
+  },
+  -- change some telescope options and a keymap to browse plugin files
+  {
+    'nvim-telescope/telescope.nvim',
+    keys = {
+      -- add a keymap to browse plugin files
+      -- stylua: ignore
+      {
+        "<leader>fp",
+        function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
+        desc = "Find nvim plugin file",
+      },
+    },
+  },
+  {
+    'LazyVim/LazyVim',
+    opts = {
+      --colorscheme = 'catppuccin',
+      --colorscheme = 'catppuccin-latte',
+      --colorscheme = 'abyss',
+      --colorscheme = 'tokyonight-night',
+      colorscheme = 'nordic',
+    },
+  },
+  -- add any tools you want to have installed below
+  {
+    'williamboman/mason.nvim',
+    opts = {
+      ensure_installed = {
+        'stylua',
+        'shellcheck',
+        'shfmt',
+      },
+    },
   },
 }
