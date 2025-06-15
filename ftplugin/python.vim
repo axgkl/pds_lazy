@@ -1,3 +1,5 @@
+"colorscheme rose-pine
+"colorscheme catpuccin
 " " syntax match pythonOperator "=" conceal cchar=≢
 " "
 " " hi link pythonOperator Operator
@@ -29,7 +31,8 @@ setlocal softtabstop=4
 setlocal autoindent
 setlocal cindent
 let g:python_highlight_all = 1
-
+"lua require('catppuccin')
+"colorscheme catppuccin
 
 
 " on demand, pyright LSP is just the right amount of information for me:

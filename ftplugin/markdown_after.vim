@@ -1,4 +1,6 @@
-colorscheme catppuccin
+"colorscheme catppuccin
+lua vim.diagnostic.enable(false)
+" lua LazyVim.toggle.diagnostics()
 
 " "syntax keyword Normal foo conceal cchar=🟧
 "

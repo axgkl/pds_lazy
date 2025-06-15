@@ -1,43 +1,45 @@
 # vim:ft=sh
 # sourced in .bashrc or .zshrc
-function  h {
-	type atuin >/dev/null && { atuin search --cmd-only "$1" && return $?; }
-	history | grep --color=auto -i "$1"
+function h {
+    type atuin >/dev/null && { atuin search --cmd-only "$1" && return $?; }
+    history | grep --color=auto -i "$1"
 }
 
 function cd {
-	builtin cd "$@" || return
-	test -f 'environ' || return
-	_try_source_environ_file
+    local d && d="${1:-$HOME}" && test -n "$1" && shift
+    test -f "$d" && echo -e "\x1b[2misfile: $d" >/dev/stderr && d="$(dirname "$d")"
+    builtin cd "$d" "$@" || return
+    test -f 'environ' || return
+    _try_source_environ_file
 }
 function _try_source_environ_file {
-	# security. don't autosource third party code
-	test -z "$PS1" && return
-	local okfiles h confirm
-	okfiles="$HOME/.config/autosourced_on_cd"
-	test -e "$okfiles" || touch "$okfiles" || return 1
-	h="$(pwd -P)"
-	grep "^$h$" <"$okfiles" && {
-		. ./environ
-		return $?
-	}
-	echo "Add $h to $okfiles? [y/N]"
-	read -r confirm
-	test "$confirm" = y && echo "$h" >>"$okfiles" && . ./environ
+    # security. don't autosource third party code
+    test -z "$PS1" && return
+    local okfiles h confirm
+    okfiles="$HOME/.config/autosourced_on_cd"
+    test -e "$okfiles" || touch "$okfiles" || return 1
+    h="$(pwd -P)"
+    grep "^$h$" <"$okfiles" && {
+        . ./environ
+        return $?
+    }
+    echo "Add $h to $okfiles? [y/N]"
+    read -r confirm
+    test "$confirm" = y && echo "$h" >>"$okfiles" && . ./environ
 }
 
 function gomod {
-	local mod="${1:-os}"
-	local l="$(python -c "import os, $mod;print(os.path.dirname($mod.__file__))")"
-	cd "$l"
-	pwd
+    local mod="${1:-os}"
+    local l="$(python -c "import os, $mod;print(os.path.dirname($mod.__file__))")"
+    cd "$l"
+    pwd
 }
 
 function ack {
-	echo 'NOT respect gitignore' >&2
-	set -x
-	rg --glob '!*.min.js' --glob '!*.min.css' --glob='!spell' --no-ignore --glob '!*arch/*' --glob '!*build/*' --glob '!*node_modules/*' --glob '!*dist/*' "$@"
-	set +x
+    echo 'NOT respect gitignore' >&2
+    set -x
+    rg --glob '!*.min.js' --glob '!*.min.css' --glob='!spell' --no-ignore --glob '!*arch/*' --glob '!*build/*' --glob '!*node_modules/*' --glob '!*dist/*' "$@"
+    set +x
 }
 alias ff='fd --no-ignore --hidden'
 alias fff='fd --no-ignore --hidden --follow'
@@ -51,27 +53,28 @@ alias mm='micromamba'
 alias scu='systemctl --user'
 unalias ll 2>/dev/null
 function ll {
-	"$HOME/micromamba/envs/tools/bin/eza" \
-		--color-scale-mode fixed \
-		--color=always \
-		--group-directories-first \
-		--icons \
-		--reverse \
-		--sort newest \
-		-g \
-		-l \
-		--time-style=relative --no-user --no-permissions \
-		"$@" |
-		sed -e 's/ minutes/m/g' |
-		sed -e 's/ minute\o033\[0m /m/g' |
-		sed -e 's/ hours\o033\[0m  /h/g' |
-		sed -e 's/ hour\o033\[0m   /h/g' |
-		sed -e 's/ days\o033\[0m   /d/g' |
-		sed -e 's/ day\o033\[0m    /d/g' |
-		sed -e 's/ weeks\o033\[0m  /w/g' |
-		sed -e 's/ week\o033\[0m   /w/g' |
-		sed -e 's/ months\o033\[0m /M/g' |
-		sed -e 's/ month\o033\[0m  /M/g' |
-		sed -e 's/ years\o033\[0m  /Y/g' |
-		sed -e 's/ year\o033\[0m   /Y/g'
+    "eza" \
+        --color-scale-mode fixed \
+        --color=always \
+        --group-directories-first \
+        --icons \
+        --reverse \
+        --sort newest \
+        -g \
+        -a \
+        -l \
+        --time-style=relative --no-user --no-permissions \
+        "$@" |
+        sed -e 's/ minutes/m/g' |
+        sed -e 's/ minute\o033\[0m /m/g' |
+        sed -e 's/ hours\o033\[0m  /h/g' |
+        sed -e 's/ hour\o033\[0m   /h/g' |
+        sed -e 's/ days\o033\[0m   /d/g' |
+        sed -e 's/ day\o033\[0m    /d/g' |
+        sed -e 's/ weeks\o033\[0m  /w/g' |
+        sed -e 's/ week\o033\[0m   /w/g' |
+        sed -e 's/ months\o033\[0m /M/g' |
+        sed -e 's/ month\o033\[0m  /M/g' |
+        sed -e 's/ years\o033\[0m  /Y/g' |
+        sed -e 's/ year\o033\[0m   /Y/g'
 }

@@ -12,7 +12,14 @@ setlocal sw=4
 "   },
 " }
 " EOF
+"  word into variable
+nmap ,v diwi "${:-}"<ESC>hhhhp
 
+nmap ,b 0_iset -x<CR><Esc>
+nmap ," viWsa"<ESC>
+nmap ,' viWsa'<ESC>
+nmap ,) viWsa)viWsa"i$<ESC>
+nmap ,} viWsa}viWsa"i$<ESC>
 " Bash folding configuration
 setlocal ft=bash foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
 

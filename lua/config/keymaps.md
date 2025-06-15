@@ -20,12 +20,14 @@ brackets, e.g. `<Enter>` (we don't clutter the tables with backticks).
 
 👉 All default Shortcuts: <https://www.lazyvim.org/configuration/keymaps>
 👉 `:map` lists them all
+👉 `:map x` lists all, beginning with x
 
-## Folding
+_#_# Folding
+
+# | <C-i> | 🟣 | Fold open | zR | " folds |
 
 | Mapping | M   | What            | How | Cmt                       |
 | ------- | --- | --------------- | --- | ------------------------- |
-| <C-i>   | 🟣  | Fold open       | zR  | " folds                   |
 | <Enter> | 🟣  | Toggle fold     | za  | bufferlocal               |
 | <S-Tab> | 🟣  | Close ALL Folds | zM  | <C-i> is ident with <TAB> |
 
@@ -37,7 +39,7 @@ Type z and let which key help you, regarding other options
 | --------------- | --- | ---------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | ,               | 🟣  | Disable ,                    | <Nop>                                                           |                                                                                  |
 | ,c              | 🟣  | Close :bd                    | :bd ⏎                                                           | Close just a split or a tab                                                      |
-| ,g              | 🟣  | [Open file or URL][vpe_goto] | :silent call PyEvalSelection('SmartGoto', '') ⏎                 | <https://github.com/axiros/vpe>                                                    |
+| ,g              | 🟣  | [Open file or URL][vpe_goto] | :silent call PyEvalSelection('SmartGoto', '') ⏎                 | <https://github.com/axiros/vpe>                                                  |
 | ,g              | 🟢  | [Open file or URL][vpe_goto] | :<C-U> silent call PyEvalSelection('SmartGoto', visualmode()) ⏎ |
 | ,q              | 🟣  | Quit all!                    | :quitall! ⏎                                                     |
 | ,u              | 🟣  | Undo Tree                    | :UndotreeToggle ⏎                                               |                                                                                  |
@@ -47,20 +49,21 @@ Type z and let which key help you, regarding other options
 | <leader>fg      | 🟣  | Git files                    | `TS().git_files()`                                              |
 | <leader><enter> | 🟣  | Previous edited buffer       | :b#<CR><Space>                                                  | in your open buffers (toggle back and forth) :b# ⏎ " previous buffer             |
 | G               | 🟣  | End of file                  | :$<CR><bar>:silent! ?begin-UNDER-archive ⏎zb                    | Move stuff you want to keep below a `begin_ archive` comment and G jumps to that |
-| ff              | 🟣  | Open file(from vi start dir) | `TS().find_files()`                                             | You can open many files at once, by selecting them with TAB in the picker        |
-| gw              | 🟣  | Live grep words              | `TS().live_grep()`                                              | 🟥 gw reformat via gq                                                            |
-| <leader>ql      | 🟣  | Session load last            | :SessionManager! load_last_session ⏎                            |
-| <leader>qs      | 🟣  | Session save current         | :SessionManager! save_current_session ⏎                         |
-| <leader>qd      | 🟣  | Session delete               | :SessionManager! delete_session ⏎                               |
-| <leader>qf      | 🟣  | Session load                 | :SessionManager! load_session ⏎                                 |
-| <leader>q.      | 🟣  | Session load session or dir  | :SessionManager! load_current_dir_session ⏎                     |
+| ff              | 🟣  | open file(from vi start dir) | `ts().find_files()`                                             | you can open many files at once, by selecting them with tab in the picker        |
+| gw              | 🟣  | live grep words              | `ts().live_grep()`                                              | 🟥 gw reformat via gq                                                            |
+
+      | <leader>ql      | 🟣  | Session load last            | :SessionManager! load_last_session ⏎                            |
+      | <leader>qs      | 🟣  | Session save current         | :SessionManager! save_current_session ⏎                         |
+      | <leader>qd      | 🟣  | Session delete               | :SessionManager! delete_session ⏎                               |
+      | <leader>qf      | 🟣  | Session load                 | :SessionManager! load_session ⏎                                 |
+      | <leader>q.      | 🟣  | Session load session or dir  | :SessionManager! load_current_dir_session ⏎                     |
 
 🟥 Arrow keys resize split windows, i.e. **won't** work for navigation (hjkl ftw)
 
 - `<Ctl>o` Jump last place (u knew that)
 - `H` `L` Window left/right selection
 
-## Editing
+_#_# Editing
 
 | Mapping   | M   | What                        | How                              | Cmt                                                                          |
 | --------- | --- | --------------------------- | -------------------------------- | ---------------------------------------------------------------------------- |
@@ -72,11 +75,12 @@ Type z and let which key help you, regarding other options
 | <C-d>     | 🟤  | Rm next bracket             | <Esc>lxA                         | The autobrackets often make superfluos 2 brackets                            |
 | <C-l>     | 🟤  | Jump over closing           | <C-O>a                           | Jump over next char (closing bracket in insert mode)                         |
 | <C-s>     | 🟣  | Save File                   | w!                               |
+| <M-y>     | 🟣  | Copy unnamed to 'a' reg     | :let @a=@" ⏎                     | keeps content avail even after d, c, y, x...                                 |
+| <M-p>     | 🟣  | Paste 'a' reg               | "ap                              |
 | <Down>    | 🟣  | Resize split down           | `SS().resize_down(2)`            |
 | <Left>    | 🟣  | Resize split left           | `SS().resize_left(2)`            |
 | <Right>   | 🟣  | Resize split right          | `SS().resize_right(2)`           |
 | <Up>      | 🟣  | Resize split up             | `SS().resize_up(2)`              |
-| <leader>d | 🟣  | Delete noregister           | `'"_d`                           | In visual or normal mode, delete w/o overwriting your "pasteable content"    |
 | <leader>d | 🟠  | Delete noregister           | `'"_d`                           |
 | <M-s>     | 🟣  | Easy global replace         | :%s//gI<Left><Left><Left>        |
 | Y         | 🟣  | Yank (like C and D)         | y$                               |
@@ -86,10 +90,11 @@ Type z and let which key help you, regarding other options
 | gq        | 🟣  | Format w/o formatexpr       | gwgw                             | null-ls messes formatexpr for some reason, which [affects `gq`][gqbugorfeat] |
 | Z         | 🟣  | Vis block mode              | <Cmd>normal! <C-v><CR>           | ctrl-v taken by terms                                                        |
 
+<leader>d | 🟣 | Delete noregister | `'"_d` | In visual or normal mode, delete w/o overwriting your "pasteable content" |
+
 - `0` Start of line
 - `jk` Same as `<ESC>` in insert mode
 - `ds]` [Remove delimiters smartly (e.g. here: [foo bar] -> foo bar)][vim-surround]
-- `ysiw]` [Wrap word into (e.g. here: foo -> [foo])][vim-surround]
 - `,s` [Autosave mode on: Write after insert mode leave][autosave]
 - `,t` [Format](./ftplugin/markdown.vim) markdown table. ';' is converted to "|"
 - `ga,` [Align selected lines on sth, e.g. here: on ","][tabularize]
@@ -104,17 +109,16 @@ Type z and let which key help you, regarding other options
 | <M-k>   | 🟤  | Jump Right Split            | <ESC><C-W><C-W> |
 | <M-k>   | 🟣  | Jump Right Split            | <C-W><C-l>      |
 | J       | 🟣  | Jump paragraph down         | }j              | 🟥 J won't line-join. fj for that   |
-| K       | 🟣  | Jump paragraph up           | {k{kk}j         |
+| <M-J>   | 🟣  | Jump paragraph up           | {k{kk}j         |
 
 ## LSP / Coding
 
-| Mapping    | M   | What               | How                                                           | Cmt                          |
-| ---------- | --- | ------------------ | ------------------------------------------------------------- | ---------------------------- |
-| ,D         | 🟣  | Buffer Diagnostics | `TS().diagnostics({bufnr=0})`                                 |
-| <leader>cR | 🟣  | Find References    | `vim.lsp.buf.references()`                                    | gr as well but in hover      |
-| <leader>cs | 🟣  | Show Symbols Outl  | :Vista!!<CR>                                                  | Only configured for nvim_lsp |
-| <M-Down>   | 🟣  | Next Trouble Loc   | `require("trouble").next({skip_groups = true, jump = true});` | gr as well but in hover      |
-| <M-Up>     | 🟣  | Prev Trouble Loc   | `require("trouble").next({skip_groups = true, jump = true});` | gr as well but in hover      |
+| Mapping    | M   | What              | How                                                           | Cmt                          |
+| ---------- | --- | ----------------- | ------------------------------------------------------------- | ---------------------------- |
+| <leader>cR | 🟣  | Find References   | `vim.lsp.buf.references()`                                    | gr as well but in hover      |
+| <leader>cs | 🟣  | Show Symbols Outl | :Vista!!<CR>                                                  | Only configured for nvim_lsp |
+| <M-Down>   | 🟣  | Next Trouble Loc  | `require("trouble").next({skip_groups = true, jump = true});` | gr as well but in hover      |
+| <M-Up>     | 🟣  | Prev Trouble Loc  | `require("trouble").next({skip_groups = true, jump = true});` | gr as well but in hover      |
 
 - `gd` Goto definition (e.g. over function name)
 - `<leader>cr` Rename e.g. function name
@@ -135,7 +139,7 @@ Type z and let which key help you, regarding other options
 | ,E      | 🟢  | Vim Eval Into         | :EvalInto ⏎                                                               |
 | ,G      | 🟣  | Lazygit               | :TermExec cmd=lazygit ⏎                                                   |
 | ,W      | 🟣  | Save all buffers      | :wa ⏎                                                                     |
-| ,r      | 🟣  | [VimPythonEval][vpe]  | :call PyEvalSelection('Eval', '') ⏎                                       | <https://github.com/axiros/vpe>        |
+| ,r      | 🟣  | [VimPythonEval][vpe]  | :call PyEvalSelection('Eval', '') ⏎                                       | <https://github.com/axiros/vpe>      |
 | ,r      | 🟢  | VimPythonEval         | :<C-U> call PyEvalSelection('Eval', visualmode()) ⏎                       |
 | <C-E>   | 🟤  |                       | <C-O>A                                                                    | " Jump to end of line in insert mode |
 | <C-L>   | 🟣  |                       | <C-W><C-J>                                                                |
@@ -188,6 +192,8 @@ Details: Any line in this file is [parsed](#code), which:
 
 #### Code
 
+\_
+
 ```python :clear @parser :silent
 MODES = {'🟣':'n', '🟠': 'v', '🟢': 'x', '🟤': 'i'}
 REPL = {' ⏎': '<CR>', '-SEMICOL-': ';', '-BACKTICK-': '`', '-UNDER-': '_'}
@@ -195,6 +201,7 @@ FUNCS = [
    'function SS() return require("smart-splits") end',
    'function TS() return require("telescope.builtin") end',
    'function UU() return require("user.utils") end',
+   'function LV() return require("lazyvim.util") end',
   '''
   function BufsWithRecent()
     require('telescope.builtin').buffers({

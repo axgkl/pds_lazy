@@ -1,0 +1,428 @@
+
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
+
+return {
+  -----------------------------------  TODO: temporary fixes
+  --https://github.com/folke/noice.nvim/issues/921
+  --{ 'folke/noice.nvim', enabled = true, commit = 'd9328ef903168b6f52385a751eb384ae7e906c6f' },
+
+  -- { --https://github.com/iamcco/markdown-preview.nvim/issues/690#issuecomment-2254280534
+  --   -- Install markdown preview, use npx if available.
+  --   'iamcco/markdown-preview.nvim',
+  --   cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+  --   ft = { 'markdown' },
+  --   build = function(plugin)
+  --     if vim.fn.executable('npx') then
+  --       vim.cmd('!cd ' .. plugin.dir .. ' && cd app && npx --yes yarn install')
+  --     else
+  --       vim.cmd([[Lazy load markdown-preview.nvim]])
+  --       vim.fn['mkdp#util#install']()
+  --     end
+  --   end,
+  --   init = function()
+  --     if vim.fn.executable('npx') then
+  --       vim.g.mkdp_filetypes = { 'markdown' }
+  --     end
+  --   end,
+  -- },
+  --
+  -- { --disable the header non symbols and the code formatting from lazy
+  --   'MeanderingProgrammer/render-markdown.nvim',
+  --   dependencies = {
+  --     'nvim-treesitter/nvim-treesitter',
+  --     --"echasnovski/mini.icons",
+  --     'nvim-tree/nvim-web-devicons',
+  --   },
+  --   ft = 'markdown',
+  --   opts = { heading = {}, code = {}, latex = { enabled = false } },
+  -- },
+
+  -- {
+  --   '3rd/image.nvim',
+  --   event = 'VeryLazy',
+  --   dependencies = {
+  --     {
+  --       'nvim-treesitter/nvim-treesitter',
+  --       build = ':TSUpdate',
+  --       config = function()
+  --         require('nvim-treesitter.configs').setup({
+  --           --ensure_installed = { 'markdown' },
+  --           ensure_installed = {},
+  --           highlight = { enable = true },
+  --         })
+  --       end,
+  --     },
+  --   },
+  --   opts = {
+  --     backend = 'kitty',
+  --     integrations = {
+  --       markdown = {
+  --         enabled = true,
+  --         clear_in_insert_mode = true,
+  --         download_remote_images = true,
+  --         only_render_image_at_cursor = true,
+  --         filetypes = { 'markdown', 'vimwiki' }, -- markdown extensions (ie. quarto) can go here
+  --       },
+  --     },
+  --     max_width = nil,
+  --     max_height = nil,
+  --     max_width_window_percentage = nil,
+  --     max_height_window_percentage = 50,
+  --     kitty_method = 'normal',
+  --   },
+  -- },
+
+  ----------------------------------- colorthemes
+  "rose-pine/neovim",
+  "sainnhe/sonokai",
+  "sainnhe/everforest",
+  "arcticicestudio/nord-vim",
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000, lazy = true },
+  "cocopon/iceberg.vim",
+  "cormacrelf/vim-colors-github",
+  {
+    "folke/tokyonight.nvim",
+    config = function()
+      require("tokyonight").setup({
+        -- use the night style
+        style = "moon",
+        -- disable italic for functions
+        -- Change the "hint" color to the "orange" color, and make the "error" color bright red
+        on_colors = function(colors)
+          colors.hint = "#555555"
+          colors.warning = "#555555"
+          colors.error = "#555555"
+        end,
+      })
+    end,
+  },
+  "ramojus/mellifluous.nvim",
+  "yazeed1s/oh-lucy.nvim",
+  "dracula/vim",
+  "joshdick/onedark.vim",
+  "matsuuu/pinkmare",
+  --'AlexvZyl/nordic.nvim',
+  "AXGKl/nordic.nvim",
+  "rebelot/kanagawa.nvim",
+  "alligator/accent.vim",
+  {
+    "barrientosvctor/abyss.nvim",
+    lazy = true,
+    priority = 1000,
+  },
+  { "lmburns/kimbox", lazy = true, priority = 1000 },
+  ----------------------------------- end colorthemes
+  -- massively good, but deserves attention: {
+  --   "HakonHarnes/img-clip.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     -- add options here
+  --     -- or leave it empty to use the default settings
+  --   },
+  --   keys = {
+  --     -- suggested keymap
+  --     { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
+  --   },
+  -- },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      bigfile = { enabled = true },
+      dashboard = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      notifier = {
+        enabled = true,
+        timeout = 3000,
+      },
+      quickfile = { enabled = true },
+      scroll = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
+      styles = {
+        notification = {
+          -- wo = { wrap = true } -- Wrap notifications
+        },
+      },
+    },
+    keys = {
+      {
+        "<leader>z",
+        function()
+          Snacks.zen()
+        end,
+        desc = "Toggle Zen Mode",
+      },
+      {
+        "<leader>Z",
+        function()
+          Snacks.zen.zoom()
+        end,
+        desc = "Toggle Zoom",
+      },
+      {
+        "<leader>.",
+        function()
+          Snacks.scratch()
+        end,
+        desc = "Toggle Scratch Buffer",
+      },
+      {
+        "<leader>S",
+        function()
+          Snacks.scratch.select()
+        end,
+        desc = "Select Scratch Buffer",
+      },
+      {
+        "<leader>n",
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = "Notification History",
+      },
+      {
+        "<leader>bd",
+        function()
+          Snacks.bufdelete()
+        end,
+        desc = "Delete Buffer",
+      },
+      {
+        "<leader>cR",
+        function()
+          Snacks.rename.rename_file()
+        end,
+        desc = "Rename File",
+      },
+      {
+        "<leader>gB",
+        function()
+          Snacks.gitbrowse()
+        end,
+        desc = "Git Browse",
+        mode = { "n", "v" },
+      },
+      {
+        "<leader>gb",
+        function()
+          Snacks.git.blame_line()
+        end,
+        desc = "Git Blame Line",
+      },
+      {
+        "<leader>gf",
+        function()
+          Snacks.lazygit.log_file()
+        end,
+        desc = "Lazygit Current File History",
+      },
+      {
+        "<leader>gg",
+        function()
+          Snacks.lazygit()
+        end,
+        desc = "Lazygit",
+      },
+      {
+        "<leader>gl",
+        function()
+          Snacks.lazygit.log()
+        end,
+        desc = "Lazygit Log (cwd)",
+      },
+      {
+        "<leader>un",
+        function()
+          Snacks.notifier.hide()
+        end,
+        desc = "Dismiss All Notifications",
+      },
+      {
+        "<c-/>",
+        function()
+          Snacks.terminal()
+        end,
+        desc = "Toggle Terminal",
+      },
+      {
+        "<c-_>",
+        function()
+          Snacks.terminal()
+        end,
+        desc = "which_key_ignore",
+      },
+      {
+        "]]",
+        function()
+          Snacks.words.jump(vim.v.count1)
+        end,
+        desc = "Next Reference",
+        mode = { "n", "t" },
+      },
+      {
+        "[[",
+        function()
+          Snacks.words.jump(-vim.v.count1)
+        end,
+        desc = "Prev Reference",
+        mode = { "n", "t" },
+      },
+      {
+        "<leader>N",
+        desc = "Neovim News",
+        function()
+          Snacks.win({
+            file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+            width = 0.6,
+            height = 0.6,
+            wo = {
+              spell = false,
+              wrap = false,
+              signcolumn = "yes",
+              statuscolumn = " ",
+              conceallevel = 3,
+            },
+          })
+        end,
+      },
+    },
+    init = function()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "VeryLazy",
+        callback = function()
+          -- Setup some globals for debugging (lazy-loaded)
+          _G.dd = function(...)
+            Snacks.debug.inspect(...)
+          end
+          _G.bt = function()
+            Snacks.debug.backtrace()
+          end
+          vim.print = _G.dd -- Override print to use snacks for `:=` command
+
+          -- Create some toggle mappings
+          Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+          Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+          Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+          Snacks.toggle.diagnostics():map("<leader>ud")
+          Snacks.toggle.line_number():map("<leader>ul")
+          Snacks.toggle
+            .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+            :map("<leader>uc")
+          Snacks.toggle.treesitter():map("<leader>uT")
+          Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+          Snacks.toggle.inlay_hints():map("<leader>uh")
+          Snacks.toggle.indent():map("<leader>ug")
+          Snacks.toggle.dim():map("<leader>uD")
+        end,
+      })
+    end,
+  },
+  "mrjones2014/smart-splits.nvim", -- better than lazies resize (left is really left in right split)
+  "vim-crystal/vim-crystal", -- ruby but fast
+  { "echasnovski/mini.pairs", enabled = false },
+
+  "axiros/vpe",
+  "godlygeek/tabular",
+  --'junegunn/limelight.vim',
+  "mbbill/undotree",
+  --'tpope/vim-surround',
+  "brentyi/isort.vim",
+  "isobit/vim-caddyfile",
+  --'nvim-zh/better-escape.vim',
+  {
+    "max397574/better-escape.nvim",
+    config = function()
+      --  jk also in caps lock mode
+      require("better_escape").setup({ default_mappings = true, mappings = { i = { J = { K = "<Esc>" } } } })
+    end,
+  },
+  "liuchengxu/vista.vim",
+  {
+
+    "hrsh7th/nvim-cmp",
+    dependencies = { "hrsh7th/cmp-emoji" },
+    opts = function(_, opts)
+      table.insert(opts.sources, { name = "emoji" })
+      table.insert(opts.sources, { name = "copilot", group_index = 2 })
+    end,
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    keys = {
+      -- add a keymap to browse plugin files
+      -- stylua: ignore
+      {
+        "<leader>T",
+        function() require("telescope.builtin").builtin() end,
+        desc = "List all Telescope Builtins",
+      },
+    },
+  },
+  -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
+  -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
+  -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
+  -- would overwrite `ensure_installed` with the new value.
+  -- If you'd rather extend the default config, use the code below instead:
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      -- add tsx and treesitter
+      vim.list_extend(opts.ensure_installed, {
+        "bash",
+        "html",
+        "javascript",
+        "json",
+        "lua",
+        --'markdown',
+        --'markdown_inline',
+        "mermaid",
+        "python",
+        "query",
+        "regex",
+        --"tsx",
+        --"typescript",
+        "vim",
+        "yaml",
+      })
+    end,
+  },
+  -- change some telescope options and a keymap to browse plugin files
+  {
+    "nvim-telescope/telescope.nvim",
+    keys = {
+      -- add a keymap to browse plugin files
+      -- stylua: ignore
+      {
+        "<leader>fp",
+        function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
+        desc = "Find nvim plugin file",
+      },
+    },
+  },
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      --colorscheme = 'catppuccin',
+      --colorscheme = 'catppuccin-latte',
+      --colorscheme = 'abyss',
+      --colorscheme = 'tokyonight-night',
+      --colorscheme = 'nordic',
+    },
+  },
+  -- add any tools you want to have installed below
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "stylua",
+        "shellcheck",
+        "shfmt",
+      },
+    },
+  },
+}
