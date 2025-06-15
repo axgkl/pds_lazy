@@ -17,9 +17,8 @@ return {
       { 'stevearc/dressing.nvim', opts = {} },
     },
     config = function()
-      local api_keys = require('api_keys')
-      -- Set the environment variable programmatically
-      vim.env.ANTHROPIC_API_KEY = api_keys.anthropic
+      -- This automatically sets vim.env.ANTHROPIC_API_KEY
+      require('api_keys')
       
       require('codecompanion').setup({
         strategies = {
@@ -42,6 +41,13 @@ return {
             })
           end,
         },
+        display = {
+          action_palette = {
+            width = 95,
+            height = 10,
+          },
+        },
+        prompt_library = require('codecompanion_prompts'),
       })
     end,
   },
